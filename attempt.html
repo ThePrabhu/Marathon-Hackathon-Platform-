@@ -1,0 +1,2044 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marathon Hackathon</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+</head>
+<body>
+    <section class="attempt-area">
+        <!-- problem statement entry code -->
+        <div class="card-container">
+            <div class="code-input-container">
+                <h1 class="code-input-heading">
+                    Enter Your Problem Statement Code
+                </h1>
+                <input type="text" class="problem-code">
+                <button class="btn problem-code-submit-btn">Enter</button>
+                <p class="errorMsg text-danger"></p>
+            </div>
+        </div>
+
+        <!-- ----------------------------------problem statement 1 -------------------------------->
+        <section class="problem d-none" data-problem="P1">
+            <!-- heading -->
+             <h2 class="problemstatementTitle text-center">
+                1 — REAL-TIME TRANSPORT & DELIVERY PLATFORM(Uber)<br>
+                (On-Demand Mobility & Live Tracking System)
+            </h2><hr>
+            <!-- story -->
+            <h3 class="problemstatementSubheading bg-danger">
+                Story / Problem Narrative
+            </h3>
+            <p class="scenario">
+                In large cities, people rely on on-demand transport for daily commuting and deliveries. The core challenge is not booking a ride, but trusting the system in real time knowing where the vehicle is, when it will arrive, and whether the system reacts correctly to delays, cancellations, or traffic changes.
+                To solve this, a real-time transport platform is introduced. Users request a ride or delivery, are matched with a nearby driver, and track the journey live on a map. The experience must feel instant, predictable, and calm, even though the system underneath is constantly changing.
+                The platform must manage live location updates, ETA recalculation, cancellations, and UI responsiveness, without overwhelming the user or exposing system complexity.
+            </p><hr>
+
+            <!-- -------scenarios------- -->
+             <h3 class="problemstatementSubheading bg-danger">
+                 App Structure Through Scenarios
+            </h3>
+            <!-- scenario-1 -->
+            <section data-section="1">
+                <h3 class="problemstatementSubheading">
+                    Scenario 1 — Entry Flow & App Structure
+                </h3>
+                <p class="scenario">
+                        When a user opens the app, the first screen immediately shows a map view. A single input field allows the user to enter a destination. The bottom section displays ride options, estimated prices, and time to arrival. Navigation is minimal, with only essential tabs accessible without leaving the map view.
+                        This structure must allow the user to complete the entire booking flow with **very few taps**, while keeping the map visible at all times.
+                </p><hr>
+            </section>
+
+            <!-- scenario-2 -->
+            <section data-section="2" class="d-none">
+                <h3 class="problemstatementSubheading">
+                    Scenario 2 — Live Specifications & Real-Time Behavior
+                </h3>
+                <p class="scenario">
+                    Once a ride is confirmed, the user sees a vehicle icon moving smoothly on the map. The estimated arrival time updates automatically without refreshing the screen. If traffic conditions change, the ETA adjusts gradually instead of jumping suddenly.
+                    The system must continuously receive location updates and reflect them visually without breaking animations or freezing the interface, even on slow networks.
+                </p><hr>
+            </section>
+
+            <!-- scenario-3 -->
+            <section data-section="3" class="d-none">
+                <h3 class="problemstatementSubheading">
+                Scenario 3 — Functional Logic & State Changes
+                </h3>
+                <p class="scenario">
+                    The ride progresses through multiple states: requested, driver assigned, arriving, in progress, completed. Each state unlocks or disables certain actions (cancel, contact driver, share trip).
+                    If the driver cancels or goes offline, the system must instantly reassign another driver without forcing the user to restart the process. All transitions must feel natural and predictable.
+                </p><hr>
+            </section>
+        
+
+            <!-- scenario-4 -->
+            <section data-section="4" class="d-none">
+                <p class="scenario">
+                    The interface uses a dark or muted map background to reduce eye strain. Primary actions (confirm ride, cancel, share) use high-contrast solid colors. Secondary information is shown using lighter text and subtle animations.
+                    Buttons are large, rounded, and placed within thumb-reach. No unnecessary icons, gradients, or decorative elements are used. The design must remain readable while the user is moving.
+                </p><hr>
+            </section>
+            <section>
+                <h3 class="problemstatementSubheading bg-danger">
+                How the System Actually Works 
+                </h3>
+                <ol class="scenario scenario-list">
+                    <li>User opens app and enters destination</li>
+                    <li>System estimates cost and time instantly</li>
+                    <li>User confirms request</li>
+                    <li>Nearby driver is assigned</li>
+                    <li>Live location updates stream continuously</li>
+                    <li>ETA recalculates dynamically</li>
+                    <li>Ride state updates until completion</li>
+                </ol><hr>
+            </section>
+
+
+            <!-------------- Rounds-Form-CodeEnter Sections----------- -->
+
+            <!-- Round-1 Question -->
+            <section class="round1" data-round="1">
+
+                <h3 class="problemstatementSubheading bg-secondary round1">
+                    ROUND 1 — Numerical
+                </h3>
+                <p class="scenario">
+                    At 9:00 AM, a ride request is confirmed.
+                    The estimated time for the driver to arrive is 12 minutes.
+                    The ride duration after pickup is estimated to be 28 minutes.<br>
+                <span class="question">
+                        Question
+                </span><br>
+                Calculate the total time from booking confirmation to ride completion.
+                Clearly explain which phases are included in the total time and why arrival time and travel time must be tracked separately.
+                </p><hr>
+        
+                <!-- Round Form -->
+                <form class="round-form" data-round="1">
+                    <h3 class="formHeading">Submit Form for Round-1</h3>
+                    <input type="text" name="teamName" class="teamName" placeholder="Team Name">
+                    <input type="text" name="teamLeader" class="teamLeader" placeholder="Team Leader">
+                    <input type="number" name="teamId" class="teamId" placeholder="Team Id/Number">
+                    <textarea name="answer" class="round-one-input" placeholder="Enter Your Answer"></textarea>
+                    <button type="submit" class="round-one-submitBtn btn btn-success">Submit!</button>
+                </form>
+
+                <!-- Round 2 Unlock Code -->
+                <div class="round-code-input-container d-none" data-unlock="2">
+                    <div class="codeCardContainer">
+                        <h1 class="text">Enter Round-2 Code!</h1>
+                        <input type="text" class="round-Two-Code">
+                        <button class="btn btn-secondary" class="unlock-btn">Enter</button>
+                        <p class="errorMsg text-danger"></p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Round 2 Question -->
+              <section class="round2 d-none" data-round="2">
+
+                <h3 class="problemstatementSubheading bg-secondary round2">
+                    ROUND 2 — Numerical
+                </h3>
+                <p class="scenario">
+                    At 9:00 AM, a ride request is confirmed.
+                    The estimated time for the driver to arrive is 12 minutes.
+                    The ride duration after pickup is estimated to be 28 minutes.<br>
+                <span class="question">
+                        Question
+                </span><br>
+                Calculate the total time from booking confirmation to ride completion.
+                Clearly explain which phases are included in the total time and why arrival time and travel time must be tracked separately.
+                </p><hr>
+        
+                <!-- Round Form -->
+                <form class="round-form d-none" data-round="2">
+                    <h3 class="formHeading">Submit Form for Round-2</h3>
+                    <input type="text" name="teamName" class="teamName" placeholder="Team Name">
+                    <input type="text" name="teamLeader" class="teamLeader" placeholder="Team Leader">
+                    <input type="number" name="teamId" class="teamId" placeholder="Team Id/Number">
+                    <textarea name="answer" class="round-two-input" placeholder="Enter Your Answer"></textarea>
+                    <button type="submit" class="round-two-submitBtn btn btn-success">Submit!</button>
+                </form>
+
+                <!-- Round 3 Unlock Code -->
+                <div class="round-code-input-container d-none" data-unlock="3">
+                    <div class="codeCardContainer">
+                        <h1 class="text">Enter Round-3 Code!</h1>
+                        <input type="text" class="round-Three-Code">
+                        <button class="btn btn-secondary" class="unlock-btn">Enter</button>
+                        <p class="errorMsg text-danger"></p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Round-3 Question -->
+              <section class="round3 d-none" data-round="3">
+
+                <h3 class="problemstatementSubheading bg-secondary round3">
+                    ROUND 3
+                </h3>
+                <p class="scenario">
+                    At 9:00 AM, a ride request is confirmed.
+                    The estimated time for the driver to arrive is 12 minutes.
+                    The ride duration after pickup is estimated to be 28 minutes.<br>
+                <span class="question">
+                        Question
+                </span><br>
+                Calculate the total time from booking confirmation to ride completion.
+                Clearly explain which phases are included in the total time and why arrival time and travel time must be tracked separately.
+                </p><hr>
+        
+                <!-- Round Form -->
+                <form class="round-form d-none" data-round="3">
+                    <h3 class="formHeading">Submit Form for Round-3</h3>
+                    <input type="text" name="teamName" class="teamName" placeholder="Team Name">
+                    <input type="text" name="teamLeader" class="teamLeader" placeholder="Team Leader">
+                    <input type="number" name="teamId" class="teamId" placeholder="Team Id/Number">
+                    <textarea name="answer" class="round-three-input" placeholder="Enter Your Answer"></textarea>
+                    <button type="submit" class="round-three-submitBtn btn btn-success">Submit!</button>
+                </form>
+
+                <!-- Round 4 Unlock Code -->
+                <div class="round-code-input-container d-none" data-unlock="4">
+                    <div class="codeCardContainer">
+                        <h1 class="text">Enter Round-4 Code!</h1>
+                        <input type="text" class="round-four-Code">
+                        <button class="btn btn-secondary" class="unlock-btn">Enter</button>
+                        <p class="errorMsg text-danger"></p>
+                    </div>
+                </div>
+            </section>
+
+             <!-- Round-4 Question -->
+              <section class="round4 d-none" data-round="4">
+
+                <h3 class="problemstatementSubheading bg-secondary round4">
+                    ROUND 4
+                </h3>
+                <p class="scenario">
+                    At 9:00 AM, a ride request is confirmed.
+                    The estimated time for the driver to arrive is 12 minutes.
+                    The ride duration after pickup is estimated to be 28 minutes.<br>
+                <span class="question">
+                        Question
+                </span><br>
+                Calculate the total time from booking confirmation to ride completion.
+                Clearly explain which phases are included in the total time and why arrival time and travel time must be tracked separately.
+                </p><hr>
+        
+                <!-- Round Form -->
+                <form class="round-form d-none" data-round="4">
+                    <h3 class="formHeading">Submit Form for Round-4</h3>
+                    <input type="text" name="teamName" class="teamName" placeholder="Team Name">
+                    <input type="text" name="teamLeader" class="teamLeader" placeholder="Team Leader">
+                    <input type="number" name="teamId" class="teamId" placeholder="Team Id/Number">
+                    <textarea name="answer" class="round-four-input" placeholder="Enter Your Answer"></textarea>
+                    <button type="submit" class="round-four-submitBtn btn btn-success">Submit!</button>
+                </form>
+              </section>
+            
+        </section>
+
+        <!-- ----------------------------------problem statement 2 ----------------------------------------------->
+        <section class="problem d-none" data-problem="P2">
+            <!-- heading -->
+             <h2 class="problemstatementTitle text-center">
+                2 — SMART JOB PORTAL SYSTEM(Company POrtals)<br>
+            </h2><hr>
+            <!-- story -->
+            <h3 class="problemstatementSubheading bg-danger">
+                Story / Problem Narrative
+            </h3>
+            <p class="scenario">
+                In large cities, people rely on on-demand transport for daily commuting and deliveries. The core challenge is not booking a ride, but trusting the system in real time knowing where the vehicle is, when it will arrive, and whether the system reacts correctly to delays, cancellations, or traffic changes.
+                To solve this, a real-time transport platform is introduced. Users request a ride or delivery, are matched with a nearby driver, and track the journey live on a map. The experience must feel instant, predictable, and calm, even though the system underneath is constantly changing.
+                The platform must manage live location updates, ETA recalculation, cancellations, and UI responsiveness, without overwhelming the user or exposing system complexity.
+            </p><hr>
+
+            <!-- -------scenarios------- -->
+             <h3 class="problemstatementSubheading bg-danger">
+                 App Structure Through Scenarios
+            </h3>
+            <!-- scenario-1 -->
+            <section data-section="1">
+                <h3 class="problemstatementSubheading">
+                    Scenario 1 — Entry Flow & App Structure
+                </h3>
+                <p class="scenario">
+                        When a user opens the app, the first screen immediately shows a map view. A single input field allows the user to enter a destination. The bottom section displays ride options, estimated prices, and time to arrival. Navigation is minimal, with only essential tabs accessible without leaving the map view.
+                        This structure must allow the user to complete the entire booking flow with **very few taps**, while keeping the map visible at all times.
+                </p><hr>
+            </section>
+
+            <!-- scenario-2 -->
+            <section data-section="2" class="d-none">
+                <h3 class="problemstatementSubheading">
+                    Scenario 2 — Live Specifications & Real-Time Behavior
+                </h3>
+                <p class="scenario">
+                    Once a ride is confirmed, the user sees a vehicle icon moving smoothly on the map. The estimated arrival time updates automatically without refreshing the screen. If traffic conditions change, the ETA adjusts gradually instead of jumping suddenly.
+                    The system must continuously receive location updates and reflect them visually without breaking animations or freezing the interface, even on slow networks.
+                </p><hr>
+            </section>
+
+            <!-- scenario-3 -->
+            <section data-section="3" class="d-none">
+                <h3 class="problemstatementSubheading">
+                Scenario 3 — Functional Logic & State Changes
+                </h3>
+                <p class="scenario">
+                    The ride progresses through multiple states: requested, driver assigned, arriving, in progress, completed. Each state unlocks or disables certain actions (cancel, contact driver, share trip).
+                    If the driver cancels or goes offline, the system must instantly reassign another driver without forcing the user to restart the process. All transitions must feel natural and predictable.
+                </p><hr>
+            </section>
+        
+
+            <!-- scenario-4 -->
+            <section data-section="4" class="d-none">
+                <p class="scenario">
+                    The interface uses a dark or muted map background to reduce eye strain. Primary actions (confirm ride, cancel, share) use high-contrast solid colors. Secondary information is shown using lighter text and subtle animations.
+                    Buttons are large, rounded, and placed within thumb-reach. No unnecessary icons, gradients, or decorative elements are used. The design must remain readable while the user is moving.
+                </p><hr>
+            </section>
+            <section>
+                <h3 class="problemstatementSubheading bg-danger">
+                How the System Actually Works 
+                </h3>
+                <ol class="scenario scenario-list">
+                    <li>User opens app and enters destination</li>
+                    <li>System estimates cost and time instantly</li>
+                    <li>User confirms request</li>
+                    <li>Nearby driver is assigned</li>
+                    <li>Live location updates stream continuously</li>
+                    <li>ETA recalculates dynamically</li>
+                    <li>Ride state updates until completion</li>
+                </ol><hr>
+            </section>
+
+
+            <!-------------- Rounds-Form-CodeEnter Sections----------- -->
+
+            <!-- Round-1 Question -->
+            <section class="round1" data-round="1">
+
+                <h3 class="problemstatementSubheading bg-secondary round1">
+                    ROUND 1 — Numerical
+                </h3>
+                <p class="scenario">
+                    At 9:00 AM, a ride request is confirmed.
+                    The estimated time for the driver to arrive is 12 minutes.
+                    The ride duration after pickup is estimated to be 28 minutes.<br>
+                <span class="question">
+                        Question
+                </span><br>
+                Calculate the total time from booking confirmation to ride completion.
+                Clearly explain which phases are included in the total time and why arrival time and travel time must be tracked separately.
+                </p><hr>
+        
+                <!-- Round Form -->
+                <form class="round-form" data-round="1">
+                    <h3 class="formHeading">Submit Form for Round-1</h3>
+                    <input type="text" name="teamName" class="teamName" placeholder="Team Name">
+                    <input type="text" name="teamLeader" class="teamLeader" placeholder="Team Leader">
+                    <input type="number" name="teamId" class="teamId" placeholder="Team Id/Number">
+                    <textarea name="answer" class="round-one-input" placeholder="Enter Your Answer"></textarea>
+                    <button type="submit" class="round-one-submitBtn btn btn-success">Submit!</button>
+                </form>
+
+                <!-- Round 2 Unlock Code -->
+                <div class="round-code-input-container d-none" data-unlock="2">
+                    <div class="codeCardContainer">
+                        <h1 class="text">Enter Round-2 Code!</h1>
+                        <input type="text" class="round-Two-Code">
+                        <button class="btn btn-secondary" class="unlock-btn">Enter</button>
+                        <p class="errorMsg text-danger"></p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Round 2 Question -->
+              <section class="round2 d-none" data-round="2">
+
+                <h3 class="problemstatementSubheading bg-secondary round2">
+                    ROUND 2 — Numerical
+                </h3>
+                <p class="scenario">
+                    At 9:00 AM, a ride request is confirmed.
+                    The estimated time for the driver to arrive is 12 minutes.
+                    The ride duration after pickup is estimated to be 28 minutes.<br>
+                <span class="question">
+                        Question
+                </span><br>
+                Calculate the total time from booking confirmation to ride completion.
+                Clearly explain which phases are included in the total time and why arrival time and travel time must be tracked separately.
+                </p><hr>
+        
+                <!-- Round Form -->
+                <form class="round-form d-none" data-round="2">
+                    <h3 class="formHeading">Submit Form for Round-2</h3>
+                    <input type="text" name="teamName" class="teamName" placeholder="Team Name">
+                    <input type="text" name="teamLeader" class="teamLeader" placeholder="Team Leader">
+                    <input type="number" name="teamId" class="teamId" placeholder="Team Id/Number">
+                    <textarea name="answer" class="round-two-input" placeholder="Enter Your Answer"></textarea>
+                    <button type="submit" class="round-two-submitBtn btn btn-success">Submit!</button>
+                </form>
+
+                <!-- Round 3 Unlock Code -->
+                <div class="round-code-input-container d-none" data-unlock="3">
+                    <div class="codeCardContainer">
+                        <h1 class="text">Enter Round-3 Code!</h1>
+                        <input type="text" class="round-Three-Code">
+                        <button class="btn btn-secondary" class="unlock-btn">Enter</button>
+                        <p class="errorMsg text-danger"></p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Round-3 Question -->
+              <section class="round3 d-none" data-round="3">
+
+                <h3 class="problemstatementSubheading bg-secondary round3">
+                    ROUND 3
+                </h3>
+                <p class="scenario">
+                    At 9:00 AM, a ride request is confirmed.
+                    The estimated time for the driver to arrive is 12 minutes.
+                    The ride duration after pickup is estimated to be 28 minutes.<br>
+                <span class="question">
+                        Question
+                </span><br>
+                Calculate the total time from booking confirmation to ride completion.
+                Clearly explain which phases are included in the total time and why arrival time and travel time must be tracked separately.
+                </p><hr>
+        
+                <!-- Round Form -->
+                <form class="round-form d-none" data-round="3">
+                    <h3 class="formHeading">Submit Form for Round-3</h3>
+                    <input type="text" name="teamName" class="teamName" placeholder="Team Name">
+                    <input type="text" name="teamLeader" class="teamLeader" placeholder="Team Leader">
+                    <input type="number" name="teamId" class="teamId" placeholder="Team Id/Number">
+                    <textarea name="answer" class="round-three-input" placeholder="Enter Your Answer"></textarea>
+                    <button type="submit" class="round-three-submitBtn btn btn-success">Submit!</button>
+                </form>
+
+                <!-- Round 4 Unlock Code -->
+                <div class="round-code-input-container d-none" data-unlock="4">
+                    <div class="codeCardContainer">
+                        <h1 class="text">Enter Round-4 Code!</h1>
+                        <input type="text" class="round-four-Code">
+                        <button class="btn btn-secondary" class="unlock-btn">Enter</button>
+                        <p class="errorMsg text-danger"></p>
+                    </div>
+                </div>
+            </section>
+
+             <!-- Round-4 Question -->
+              <section class="round4 d-none" data-round="4">
+
+                <h3 class="problemstatementSubheading bg-secondary round4">
+                    ROUND 4
+                </h3>
+                <p class="scenario">
+                    At 9:00 AM, a ride request is confirmed.
+                    The estimated time for the driver to arrive is 12 minutes.
+                    The ride duration after pickup is estimated to be 28 minutes.<br>
+                <span class="question">
+                        Question
+                </span><br>
+                Calculate the total time from booking confirmation to ride completion.
+                Clearly explain which phases are included in the total time and why arrival time and travel time must be tracked separately.
+                </p><hr>
+        
+                <!-- Round Form -->
+                <form class="round-form d-none" data-round="4">
+                    <h3 class="formHeading">Submit Form for Round-4</h3>
+                    <input type="text" name="teamName" class="teamName" placeholder="Team Name">
+                    <input type="text" name="teamLeader" class="teamLeader" placeholder="Team Leader">
+                    <input type="number" name="teamId" class="teamId" placeholder="Team Id/Number">
+                    <textarea name="answer" class="round-four-input" placeholder="Enter Your Answer"></textarea>
+                    <button type="submit" class="round-four-submitBtn btn btn-success">Submit!</button>
+                </form>
+              </section>
+            
+        </section>
+
+        <!-- ----------------------------------problem statement 3 -------------------------------->
+        <section class="problem d-none" data-problem="P3">
+            <!-- heading -->
+             <h2 class="problemstatementTitle text-center">
+                1 — REAL-TIME TRANSPORT & DELIVERY PLATFORM(Uber)<br>
+                (On-Demand Mobility & Live Tracking System)
+            </h2><hr>
+            <!-- story -->
+            <h3 class="problemstatementSubheading bg-danger">
+                Story / Problem Narrative
+            </h3>
+            <p class="scenario">
+                In large cities, people rely on on-demand transport for daily commuting and deliveries. The core challenge is not booking a ride, but trusting the system in real time knowing where the vehicle is, when it will arrive, and whether the system reacts correctly to delays, cancellations, or traffic changes.
+                To solve this, a real-time transport platform is introduced. Users request a ride or delivery, are matched with a nearby driver, and track the journey live on a map. The experience must feel instant, predictable, and calm, even though the system underneath is constantly changing.
+                The platform must manage live location updates, ETA recalculation, cancellations, and UI responsiveness, without overwhelming the user or exposing system complexity.
+            </p><hr>
+
+            <!-- -------scenarios------- -->
+             <h3 class="problemstatementSubheading bg-danger">
+                 App Structure Through Scenarios
+            </h3>
+            <!-- scenario-1 -->
+            <section data-section="1">
+                <h3 class="problemstatementSubheading">
+                    Scenario 1 — Entry Flow & App Structure
+                </h3>
+                <p class="scenario">
+                        When a user opens the app, the first screen immediately shows a map view. A single input field allows the user to enter a destination. The bottom section displays ride options, estimated prices, and time to arrival. Navigation is minimal, with only essential tabs accessible without leaving the map view.
+                        This structure must allow the user to complete the entire booking flow with **very few taps**, while keeping the map visible at all times.
+                </p><hr>
+            </section>
+
+            <!-- scenario-2 -->
+            <section data-section="2" class="d-none">
+                <h3 class="problemstatementSubheading">
+                    Scenario 2 — Live Specifications & Real-Time Behavior
+                </h3>
+                <p class="scenario">
+                    Once a ride is confirmed, the user sees a vehicle icon moving smoothly on the map. The estimated arrival time updates automatically without refreshing the screen. If traffic conditions change, the ETA adjusts gradually instead of jumping suddenly.
+                    The system must continuously receive location updates and reflect them visually without breaking animations or freezing the interface, even on slow networks.
+                </p><hr>
+            </section>
+
+            <!-- scenario-3 -->
+            <section data-section="3" class="d-none">
+                <h3 class="problemstatementSubheading">
+                Scenario 3 — Functional Logic & State Changes
+                </h3>
+                <p class="scenario">
+                    The ride progresses through multiple states: requested, driver assigned, arriving, in progress, completed. Each state unlocks or disables certain actions (cancel, contact driver, share trip).
+                    If the driver cancels or goes offline, the system must instantly reassign another driver without forcing the user to restart the process. All transitions must feel natural and predictable.
+                </p><hr>
+            </section>
+        
+
+            <!-- scenario-4 -->
+            <section data-section="4" class="d-none">
+                <p class="scenario">
+                    The interface uses a dark or muted map background to reduce eye strain. Primary actions (confirm ride, cancel, share) use high-contrast solid colors. Secondary information is shown using lighter text and subtle animations.
+                    Buttons are large, rounded, and placed within thumb-reach. No unnecessary icons, gradients, or decorative elements are used. The design must remain readable while the user is moving.
+                </p><hr>
+            </section>
+            <section>
+                <h3 class="problemstatementSubheading bg-danger">
+                How the System Actually Works 
+                </h3>
+                <ol class="scenario scenario-list">
+                    <li>User opens app and enters destination</li>
+                    <li>System estimates cost and time instantly</li>
+                    <li>User confirms request</li>
+                    <li>Nearby driver is assigned</li>
+                    <li>Live location updates stream continuously</li>
+                    <li>ETA recalculates dynamically</li>
+                    <li>Ride state updates until completion</li>
+                </ol><hr>
+            </section>
+
+
+            <!-------------- Rounds-Form-CodeEnter Sections----------- -->
+
+            <!-- Round-1 Question -->
+            <section class="round1" data-round="1">
+
+                <h3 class="problemstatementSubheading bg-secondary round1">
+                    ROUND 1 — Numerical
+                </h3>
+                <p class="scenario">
+                    At 9:00 AM, a ride request is confirmed.
+                    The estimated time for the driver to arrive is 12 minutes.
+                    The ride duration after pickup is estimated to be 28 minutes.<br>
+                <span class="question">
+                        Question
+                </span><br>
+                Calculate the total time from booking confirmation to ride completion.
+                Clearly explain which phases are included in the total time and why arrival time and travel time must be tracked separately.
+                </p><hr>
+        
+                <!-- Round Form -->
+                <form class="round-form" data-round="1">
+                    <h3 class="formHeading">Submit Form for Round-1</h3>
+                    <input type="text" name="teamName" class="teamName" placeholder="Team Name">
+                    <input type="text" name="teamLeader" class="teamLeader" placeholder="Team Leader">
+                    <input type="number" name="teamId" class="teamId" placeholder="Team Id/Number">
+                    <textarea name="answer" class="round-one-input" placeholder="Enter Your Answer"></textarea>
+                    <button type="submit" class="round-one-submitBtn btn btn-success">Submit!</button>
+                </form>
+
+                <!-- Round 2 Unlock Code -->
+                <div class="round-code-input-container d-none" data-unlock="2">
+                    <div class="codeCardContainer">
+                        <h1 class="text">Enter Round-2 Code!</h1>
+                        <input type="text" class="round-Two-Code">
+                        <button class="btn btn-secondary" class="unlock-btn">Enter</button>
+                        <p class="errorMsg text-danger"></p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Round 2 Question -->
+              <section class="round2 d-none" data-round="2">
+
+                <h3 class="problemstatementSubheading bg-secondary round2">
+                    ROUND 2 — Numerical
+                </h3>
+                <p class="scenario">
+                    At 9:00 AM, a ride request is confirmed.
+                    The estimated time for the driver to arrive is 12 minutes.
+                    The ride duration after pickup is estimated to be 28 minutes.<br>
+                <span class="question">
+                        Question
+                </span><br>
+                Calculate the total time from booking confirmation to ride completion.
+                Clearly explain which phases are included in the total time and why arrival time and travel time must be tracked separately.
+                </p><hr>
+        
+                <!-- Round Form -->
+                <form class="round-form d-none" data-round="2">
+                    <h3 class="formHeading">Submit Form for Round-2</h3>
+                    <input type="text" name="teamName" class="teamName" placeholder="Team Name">
+                    <input type="text" name="teamLeader" class="teamLeader" placeholder="Team Leader">
+                    <input type="number" name="teamId" class="teamId" placeholder="Team Id/Number">
+                    <textarea name="answer" class="round-two-input" placeholder="Enter Your Answer"></textarea>
+                    <button type="submit" class="round-two-submitBtn btn btn-success">Submit!</button>
+                </form>
+
+                <!-- Round 3 Unlock Code -->
+                <div class="round-code-input-container d-none" data-unlock="3">
+                    <div class="codeCardContainer">
+                        <h1 class="text">Enter Round-3 Code!</h1>
+                        <input type="text" class="round-Three-Code">
+                        <button class="btn btn-secondary" class="unlock-btn">Enter</button>
+                        <p class="errorMsg text-danger"></p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Round-3 Question -->
+              <section class="round3 d-none" data-round="3">
+
+                <h3 class="problemstatementSubheading bg-secondary round3">
+                    ROUND 3
+                </h3>
+                <p class="scenario">
+                    At 9:00 AM, a ride request is confirmed.
+                    The estimated time for the driver to arrive is 12 minutes.
+                    The ride duration after pickup is estimated to be 28 minutes.<br>
+                <span class="question">
+                        Question
+                </span><br>
+                Calculate the total time from booking confirmation to ride completion.
+                Clearly explain which phases are included in the total time and why arrival time and travel time must be tracked separately.
+                </p><hr>
+        
+                <!-- Round Form -->
+                <form class="round-form d-none" data-round="3">
+                    <h3 class="formHeading">Submit Form for Round-3</h3>
+                    <input type="text" name="teamName" class="teamName" placeholder="Team Name">
+                    <input type="text" name="teamLeader" class="teamLeader" placeholder="Team Leader">
+                    <input type="number" name="teamId" class="teamId" placeholder="Team Id/Number">
+                    <textarea name="answer" class="round-three-input" placeholder="Enter Your Answer"></textarea>
+                    <button type="submit" class="round-three-submitBtn btn btn-success">Submit!</button>
+                </form>
+
+                <!-- Round 4 Unlock Code -->
+                <div class="round-code-input-container d-none" data-unlock="4">
+                    <div class="codeCardContainer">
+                        <h1 class="text">Enter Round-4 Code!</h1>
+                        <input type="text" class="round-four-Code">
+                        <button class="btn btn-secondary" class="unlock-btn">Enter</button>
+                        <p class="errorMsg text-danger"></p>
+                    </div>
+                </div>
+            </section>
+
+             <!-- Round-4 Question -->
+              <section class="round4 d-none" data-round="4">
+
+                <h3 class="problemstatementSubheading bg-secondary round4">
+                    ROUND 4
+                </h3>
+                <p class="scenario">
+                    At 9:00 AM, a ride request is confirmed.
+                    The estimated time for the driver to arrive is 12 minutes.
+                    The ride duration after pickup is estimated to be 28 minutes.<br>
+                <span class="question">
+                        Question
+                </span><br>
+                Calculate the total time from booking confirmation to ride completion.
+                Clearly explain which phases are included in the total time and why arrival time and travel time must be tracked separately.
+                </p><hr>
+        
+                <!-- Round Form -->
+                <form class="round-form d-none" data-round="4">
+                    <h3 class="formHeading">Submit Form for Round-4</h3>
+                    <input type="text" name="teamName" class="teamName" placeholder="Team Name">
+                    <input type="text" name="teamLeader" class="teamLeader" placeholder="Team Leader">
+                    <input type="number" name="teamId" class="teamId" placeholder="Team Id/Number">
+                    <textarea name="answer" class="round-four-input" placeholder="Enter Your Answer"></textarea>
+                    <button type="submit" class="round-four-submitBtn btn btn-success">Submit!</button>
+                </form>
+              </section>
+            
+        </section>
+
+        <!-- ----------------------------------problem statement 4 -------------------------------->
+        <section class="problem d-none" data-problem="P4">
+            <!-- heading -->
+             <h2 class="problemstatementTitle text-center">
+                1 — REAL-TIME TRANSPORT & DELIVERY PLATFORM(Uber)<br>
+                (On-Demand Mobility & Live Tracking System)
+            </h2><hr>
+            <!-- story -->
+            <h3 class="problemstatementSubheading bg-danger">
+                Story / Problem Narrative
+            </h3>
+            <p class="scenario">
+                In large cities, people rely on on-demand transport for daily commuting and deliveries. The core challenge is not booking a ride, but trusting the system in real time knowing where the vehicle is, when it will arrive, and whether the system reacts correctly to delays, cancellations, or traffic changes.
+                To solve this, a real-time transport platform is introduced. Users request a ride or delivery, are matched with a nearby driver, and track the journey live on a map. The experience must feel instant, predictable, and calm, even though the system underneath is constantly changing.
+                The platform must manage live location updates, ETA recalculation, cancellations, and UI responsiveness, without overwhelming the user or exposing system complexity.
+            </p><hr>
+
+            <!-- -------scenarios------- -->
+             <h3 class="problemstatementSubheading bg-danger">
+                 App Structure Through Scenarios
+            </h3>
+            <!-- scenario-1 -->
+            <section data-section="1">
+                <h3 class="problemstatementSubheading">
+                    Scenario 1 — Entry Flow & App Structure
+                </h3>
+                <p class="scenario">
+                        When a user opens the app, the first screen immediately shows a map view. A single input field allows the user to enter a destination. The bottom section displays ride options, estimated prices, and time to arrival. Navigation is minimal, with only essential tabs accessible without leaving the map view.
+                        This structure must allow the user to complete the entire booking flow with **very few taps**, while keeping the map visible at all times.
+                </p><hr>
+            </section>
+
+            <!-- scenario-2 -->
+            <section data-section="2" class="d-none">
+                <h3 class="problemstatementSubheading">
+                    Scenario 2 — Live Specifications & Real-Time Behavior
+                </h3>
+                <p class="scenario">
+                    Once a ride is confirmed, the user sees a vehicle icon moving smoothly on the map. The estimated arrival time updates automatically without refreshing the screen. If traffic conditions change, the ETA adjusts gradually instead of jumping suddenly.
+                    The system must continuously receive location updates and reflect them visually without breaking animations or freezing the interface, even on slow networks.
+                </p><hr>
+            </section>
+
+            <!-- scenario-3 -->
+            <section data-section="3" class="d-none">
+                <h3 class="problemstatementSubheading">
+                Scenario 3 — Functional Logic & State Changes
+                </h3>
+                <p class="scenario">
+                    The ride progresses through multiple states: requested, driver assigned, arriving, in progress, completed. Each state unlocks or disables certain actions (cancel, contact driver, share trip).
+                    If the driver cancels or goes offline, the system must instantly reassign another driver without forcing the user to restart the process. All transitions must feel natural and predictable.
+                </p><hr>
+            </section>
+        
+
+            <!-- scenario-4 -->
+            <section data-section="4" class="d-none">
+                <p class="scenario">
+                    The interface uses a dark or muted map background to reduce eye strain. Primary actions (confirm ride, cancel, share) use high-contrast solid colors. Secondary information is shown using lighter text and subtle animations.
+                    Buttons are large, rounded, and placed within thumb-reach. No unnecessary icons, gradients, or decorative elements are used. The design must remain readable while the user is moving.
+                </p><hr>
+            </section>
+            <section>
+                <h3 class="problemstatementSubheading bg-danger">
+                How the System Actually Works 
+                </h3>
+                <ol class="scenario scenario-list">
+                    <li>User opens app and enters destination</li>
+                    <li>System estimates cost and time instantly</li>
+                    <li>User confirms request</li>
+                    <li>Nearby driver is assigned</li>
+                    <li>Live location updates stream continuously</li>
+                    <li>ETA recalculates dynamically</li>
+                    <li>Ride state updates until completion</li>
+                </ol><hr>
+            </section>
+
+
+            <!-------------- Rounds-Form-CodeEnter Sections----------- -->
+
+            <!-- Round-1 Question -->
+            <section class="round1" data-round="1">
+
+                <h3 class="problemstatementSubheading bg-secondary round1">
+                    ROUND 1 — Numerical
+                </h3>
+                <p class="scenario">
+                    At 9:00 AM, a ride request is confirmed.
+                    The estimated time for the driver to arrive is 12 minutes.
+                    The ride duration after pickup is estimated to be 28 minutes.<br>
+                <span class="question">
+                        Question
+                </span><br>
+                Calculate the total time from booking confirmation to ride completion.
+                Clearly explain which phases are included in the total time and why arrival time and travel time must be tracked separately.
+                </p><hr>
+        
+                <!-- Round Form -->
+                <form class="round-form" data-round="1">
+                    <h3 class="formHeading">Submit Form for Round-1</h3>
+                    <input type="text" name="teamName" class="teamName" placeholder="Team Name">
+                    <input type="text" name="teamLeader" class="teamLeader" placeholder="Team Leader">
+                    <input type="number" name="teamId" class="teamId" placeholder="Team Id/Number">
+                    <textarea name="answer" class="round-one-input" placeholder="Enter Your Answer"></textarea>
+                    <button type="submit" class="round-one-submitBtn btn btn-success">Submit!</button>
+                </form>
+
+                <!-- Round 2 Unlock Code -->
+                <div class="round-code-input-container d-none" data-unlock="2">
+                    <div class="codeCardContainer">
+                        <h1 class="text">Enter Round-2 Code!</h1>
+                        <input type="text" class="round-Two-Code">
+                        <button class="btn btn-secondary" class="unlock-btn">Enter</button>
+                        <p class="errorMsg text-danger"></p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Round 2 Question -->
+              <section class="round2 d-none" data-round="2">
+
+                <h3 class="problemstatementSubheading bg-secondary round2">
+                    ROUND 2 — Numerical
+                </h3>
+                <p class="scenario">
+                    At 9:00 AM, a ride request is confirmed.
+                    The estimated time for the driver to arrive is 12 minutes.
+                    The ride duration after pickup is estimated to be 28 minutes.<br>
+                <span class="question">
+                        Question
+                </span><br>
+                Calculate the total time from booking confirmation to ride completion.
+                Clearly explain which phases are included in the total time and why arrival time and travel time must be tracked separately.
+                </p><hr>
+        
+                <!-- Round Form -->
+                <form class="round-form d-none" data-round="2">
+                    <h3 class="formHeading">Submit Form for Round-2</h3>
+                    <input type="text" name="teamName" class="teamName" placeholder="Team Name">
+                    <input type="text" name="teamLeader" class="teamLeader" placeholder="Team Leader">
+                    <input type="number" name="teamId" class="teamId" placeholder="Team Id/Number">
+                    <textarea name="answer" class="round-two-input" placeholder="Enter Your Answer"></textarea>
+                    <button type="submit" class="round-two-submitBtn btn btn-success">Submit!</button>
+                </form>
+
+                <!-- Round 3 Unlock Code -->
+                <div class="round-code-input-container d-none" data-unlock="3">
+                    <div class="codeCardContainer">
+                        <h1 class="text">Enter Round-3 Code!</h1>
+                        <input type="text" class="round-Three-Code">
+                        <button class="btn btn-secondary" class="unlock-btn">Enter</button>
+                        <p class="errorMsg text-danger"></p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Round-3 Question -->
+              <section class="round3 d-none" data-round="3">
+
+                <h3 class="problemstatementSubheading bg-secondary round3">
+                    ROUND 3
+                </h3>
+                <p class="scenario">
+                    At 9:00 AM, a ride request is confirmed.
+                    The estimated time for the driver to arrive is 12 minutes.
+                    The ride duration after pickup is estimated to be 28 minutes.<br>
+                <span class="question">
+                        Question
+                </span><br>
+                Calculate the total time from booking confirmation to ride completion.
+                Clearly explain which phases are included in the total time and why arrival time and travel time must be tracked separately.
+                </p><hr>
+        
+                <!-- Round Form -->
+                <form class="round-form d-none" data-round="3">
+                    <h3 class="formHeading">Submit Form for Round-3</h3>
+                    <input type="text" name="teamName" class="teamName" placeholder="Team Name">
+                    <input type="text" name="teamLeader" class="teamLeader" placeholder="Team Leader">
+                    <input type="number" name="teamId" class="teamId" placeholder="Team Id/Number">
+                    <textarea name="answer" class="round-three-input" placeholder="Enter Your Answer"></textarea>
+                    <button type="submit" class="round-three-submitBtn btn btn-success">Submit!</button>
+                </form>
+
+                <!-- Round 4 Unlock Code -->
+                <div class="round-code-input-container d-none" data-unlock="4">
+                    <div class="codeCardContainer">
+                        <h1 class="text">Enter Round-4 Code!</h1>
+                        <input type="text" class="round-four-Code">
+                        <button class="btn btn-secondary" class="unlock-btn">Enter</button>
+                        <p class="errorMsg text-danger"></p>
+                    </div>
+                </div>
+            </section>
+
+             <!-- Round-4 Question -->
+              <section class="round4 d-none" data-round="4">
+
+                <h3 class="problemstatementSubheading bg-secondary round4">
+                    ROUND 4
+                </h3>
+                <p class="scenario">
+                    At 9:00 AM, a ride request is confirmed.
+                    The estimated time for the driver to arrive is 12 minutes.
+                    The ride duration after pickup is estimated to be 28 minutes.<br>
+                <span class="question">
+                        Question
+                </span><br>
+                Calculate the total time from booking confirmation to ride completion.
+                Clearly explain which phases are included in the total time and why arrival time and travel time must be tracked separately.
+                </p><hr>
+        
+                <!-- Round Form -->
+                <form class="round-form d-none" data-round="4">
+                    <h3 class="formHeading">Submit Form for Round-4</h3>
+                    <input type="text" name="teamName" class="teamName" placeholder="Team Name">
+                    <input type="text" name="teamLeader" class="teamLeader" placeholder="Team Leader">
+                    <input type="number" name="teamId" class="teamId" placeholder="Team Id/Number">
+                    <textarea name="answer" class="round-four-input" placeholder="Enter Your Answer"></textarea>
+                    <button type="submit" class="round-four-submitBtn btn btn-success">Submit!</button>
+                </form>
+              </section>
+            
+        </section>
+
+        <!-- ----------------------------------problem statement 5 -------------------------------->
+        <section class="problem d-none" data-problem="P5">
+            <!-- heading -->
+             <h2 class="problemstatementTitle text-center">
+                1 — REAL-TIME TRANSPORT & DELIVERY PLATFORM(Uber)<br>
+                (On-Demand Mobility & Live Tracking System)
+            </h2><hr>
+            <!-- story -->
+            <h3 class="problemstatementSubheading bg-danger">
+                Story / Problem Narrative
+            </h3>
+            <p class="scenario">
+                In large cities, people rely on on-demand transport for daily commuting and deliveries. The core challenge is not booking a ride, but trusting the system in real time knowing where the vehicle is, when it will arrive, and whether the system reacts correctly to delays, cancellations, or traffic changes.
+                To solve this, a real-time transport platform is introduced. Users request a ride or delivery, are matched with a nearby driver, and track the journey live on a map. The experience must feel instant, predictable, and calm, even though the system underneath is constantly changing.
+                The platform must manage live location updates, ETA recalculation, cancellations, and UI responsiveness, without overwhelming the user or exposing system complexity.
+            </p><hr>
+
+            <!-- -------scenarios------- -->
+             <h3 class="problemstatementSubheading bg-danger">
+                 App Structure Through Scenarios
+            </h3>
+            <!-- scenario-1 -->
+            <section data-section="1">
+                <h3 class="problemstatementSubheading">
+                    Scenario 1 — Entry Flow & App Structure
+                </h3>
+                <p class="scenario">
+                        When a user opens the app, the first screen immediately shows a map view. A single input field allows the user to enter a destination. The bottom section displays ride options, estimated prices, and time to arrival. Navigation is minimal, with only essential tabs accessible without leaving the map view.
+                        This structure must allow the user to complete the entire booking flow with **very few taps**, while keeping the map visible at all times.
+                </p><hr>
+            </section>
+
+            <!-- scenario-2 -->
+            <section data-section="2" class="d-none">
+                <h3 class="problemstatementSubheading">
+                    Scenario 2 — Live Specifications & Real-Time Behavior
+                </h3>
+                <p class="scenario">
+                    Once a ride is confirmed, the user sees a vehicle icon moving smoothly on the map. The estimated arrival time updates automatically without refreshing the screen. If traffic conditions change, the ETA adjusts gradually instead of jumping suddenly.
+                    The system must continuously receive location updates and reflect them visually without breaking animations or freezing the interface, even on slow networks.
+                </p><hr>
+            </section>
+
+            <!-- scenario-3 -->
+            <section data-section="3" class="d-none">
+                <h3 class="problemstatementSubheading">
+                Scenario 3 — Functional Logic & State Changes
+                </h3>
+                <p class="scenario">
+                    The ride progresses through multiple states: requested, driver assigned, arriving, in progress, completed. Each state unlocks or disables certain actions (cancel, contact driver, share trip).
+                    If the driver cancels or goes offline, the system must instantly reassign another driver without forcing the user to restart the process. All transitions must feel natural and predictable.
+                </p><hr>
+            </section>
+        
+
+            <!-- scenario-4 -->
+            <section data-section="4" class="d-none">
+                <p class="scenario">
+                    The interface uses a dark or muted map background to reduce eye strain. Primary actions (confirm ride, cancel, share) use high-contrast solid colors. Secondary information is shown using lighter text and subtle animations.
+                    Buttons are large, rounded, and placed within thumb-reach. No unnecessary icons, gradients, or decorative elements are used. The design must remain readable while the user is moving.
+                </p><hr>
+            </section>
+            <section>
+                <h3 class="problemstatementSubheading bg-danger">
+                How the System Actually Works 
+                </h3>
+                <ol class="scenario scenario-list">
+                    <li>User opens app and enters destination</li>
+                    <li>System estimates cost and time instantly</li>
+                    <li>User confirms request</li>
+                    <li>Nearby driver is assigned</li>
+                    <li>Live location updates stream continuously</li>
+                    <li>ETA recalculates dynamically</li>
+                    <li>Ride state updates until completion</li>
+                </ol><hr>
+            </section>
+
+
+            <!-------------- Rounds-Form-CodeEnter Sections----------- -->
+
+            <!-- Round-1 Question -->
+            <section class="round1" data-round="1">
+
+                <h3 class="problemstatementSubheading bg-secondary round1">
+                    ROUND 1 — Numerical
+                </h3>
+                <p class="scenario">
+                    At 9:00 AM, a ride request is confirmed.
+                    The estimated time for the driver to arrive is 12 minutes.
+                    The ride duration after pickup is estimated to be 28 minutes.<br>
+                <span class="question">
+                        Question
+                </span><br>
+                Calculate the total time from booking confirmation to ride completion.
+                Clearly explain which phases are included in the total time and why arrival time and travel time must be tracked separately.
+                </p><hr>
+        
+                <!-- Round Form -->
+                <form class="round-form" data-round="1">
+                    <h3 class="formHeading">Submit Form for Round-1</h3>
+                    <input type="text" name="teamName" class="teamName" placeholder="Team Name">
+                    <input type="text" name="teamLeader" class="teamLeader" placeholder="Team Leader">
+                    <input type="number" name="teamId" class="teamId" placeholder="Team Id/Number">
+                    <textarea name="answer" class="round-one-input" placeholder="Enter Your Answer"></textarea>
+                    <button type="submit" class="round-one-submitBtn btn btn-success">Submit!</button>
+                </form>
+
+                <!-- Round 2 Unlock Code -->
+                <div class="round-code-input-container d-none" data-unlock="2">
+                    <div class="codeCardContainer">
+                        <h1 class="text">Enter Round-2 Code!</h1>
+                        <input type="text" class="round-Two-Code">
+                        <button class="btn btn-secondary" class="unlock-btn">Enter</button>
+                        <p class="errorMsg text-danger"></p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Round 2 Question -->
+              <section class="round2 d-none" data-round="2">
+
+                <h3 class="problemstatementSubheading bg-secondary round2">
+                    ROUND 2 — Numerical
+                </h3>
+                <p class="scenario">
+                    At 9:00 AM, a ride request is confirmed.
+                    The estimated time for the driver to arrive is 12 minutes.
+                    The ride duration after pickup is estimated to be 28 minutes.<br>
+                <span class="question">
+                        Question
+                </span><br>
+                Calculate the total time from booking confirmation to ride completion.
+                Clearly explain which phases are included in the total time and why arrival time and travel time must be tracked separately.
+                </p><hr>
+        
+                <!-- Round Form -->
+                <form class="round-form d-none" data-round="2">
+                    <h3 class="formHeading">Submit Form for Round-2</h3>
+                    <input type="text" name="teamName" class="teamName" placeholder="Team Name">
+                    <input type="text" name="teamLeader" class="teamLeader" placeholder="Team Leader">
+                    <input type="number" name="teamId" class="teamId" placeholder="Team Id/Number">
+                    <textarea name="answer" class="round-two-input" placeholder="Enter Your Answer"></textarea>
+                    <button type="submit" class="round-two-submitBtn btn btn-success">Submit!</button>
+                </form>
+
+                <!-- Round 3 Unlock Code -->
+                <div class="round-code-input-container d-none" data-unlock="3">
+                    <div class="codeCardContainer">
+                        <h1 class="text">Enter Round-3 Code!</h1>
+                        <input type="text" class="round-Three-Code">
+                        <button class="btn btn-secondary" class="unlock-btn">Enter</button>
+                        <p class="errorMsg text-danger"></p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Round-3 Question -->
+              <section class="round3 d-none" data-round="3">
+
+                <h3 class="problemstatementSubheading bg-secondary round3">
+                    ROUND 3
+                </h3>
+                <p class="scenario">
+                    At 9:00 AM, a ride request is confirmed.
+                    The estimated time for the driver to arrive is 12 minutes.
+                    The ride duration after pickup is estimated to be 28 minutes.<br>
+                <span class="question">
+                        Question
+                </span><br>
+                Calculate the total time from booking confirmation to ride completion.
+                Clearly explain which phases are included in the total time and why arrival time and travel time must be tracked separately.
+                </p><hr>
+        
+                <!-- Round Form -->
+                <form class="round-form d-none" data-round="3">
+                    <h3 class="formHeading">Submit Form for Round-3</h3>
+                    <input type="text" name="teamName" class="teamName" placeholder="Team Name">
+                    <input type="text" name="teamLeader" class="teamLeader" placeholder="Team Leader">
+                    <input type="number" name="teamId" class="teamId" placeholder="Team Id/Number">
+                    <textarea name="answer" class="round-three-input" placeholder="Enter Your Answer"></textarea>
+                    <button type="submit" class="round-three-submitBtn btn btn-success">Submit!</button>
+                </form>
+
+                <!-- Round 4 Unlock Code -->
+                <div class="round-code-input-container d-none" data-unlock="4">
+                    <div class="codeCardContainer">
+                        <h1 class="text">Enter Round-4 Code!</h1>
+                        <input type="text" class="round-four-Code">
+                        <button class="btn btn-secondary" class="unlock-btn">Enter</button>
+                        <p class="errorMsg text-danger"></p>
+                    </div>
+                </div>
+            </section>
+
+             <!-- Round-4 Question -->
+              <section class="round4 d-none" data-round="4">
+
+                <h3 class="problemstatementSubheading bg-secondary round4">
+                    ROUND 4
+                </h3>
+                <p class="scenario">
+                    At 9:00 AM, a ride request is confirmed.
+                    The estimated time for the driver to arrive is 12 minutes.
+                    The ride duration after pickup is estimated to be 28 minutes.<br>
+                <span class="question">
+                        Question
+                </span><br>
+                Calculate the total time from booking confirmation to ride completion.
+                Clearly explain which phases are included in the total time and why arrival time and travel time must be tracked separately.
+                </p><hr>
+        
+                <!-- Round Form -->
+                <form class="round-form d-none" data-round="4">
+                    <h3 class="formHeading">Submit Form for Round-4</h3>
+                    <input type="text" name="teamName" class="teamName" placeholder="Team Name">
+                    <input type="text" name="teamLeader" class="teamLeader" placeholder="Team Leader">
+                    <input type="number" name="teamId" class="teamId" placeholder="Team Id/Number">
+                    <textarea name="answer" class="round-four-input" placeholder="Enter Your Answer"></textarea>
+                    <button type="submit" class="round-four-submitBtn btn btn-success">Submit!</button>
+                </form>
+              </section>
+            
+        </section>
+
+        <!-- ----------------------------------problem statement 6 -------------------------------->
+        <section class="problem d-none" data-problem="P6">
+            <!-- heading -->
+             <h2 class="problemstatementTitle text-center">
+                1 — REAL-TIME TRANSPORT & DELIVERY PLATFORM(Uber)<br>
+                (On-Demand Mobility & Live Tracking System)
+            </h2><hr>
+            <!-- story -->
+            <h3 class="problemstatementSubheading bg-danger">
+                Story / Problem Narrative
+            </h3>
+            <p class="scenario">
+                In large cities, people rely on on-demand transport for daily commuting and deliveries. The core challenge is not booking a ride, but trusting the system in real time knowing where the vehicle is, when it will arrive, and whether the system reacts correctly to delays, cancellations, or traffic changes.
+                To solve this, a real-time transport platform is introduced. Users request a ride or delivery, are matched with a nearby driver, and track the journey live on a map. The experience must feel instant, predictable, and calm, even though the system underneath is constantly changing.
+                The platform must manage live location updates, ETA recalculation, cancellations, and UI responsiveness, without overwhelming the user or exposing system complexity.
+            </p><hr>
+
+            <!-- -------scenarios------- -->
+             <h3 class="problemstatementSubheading bg-danger">
+                 App Structure Through Scenarios
+            </h3>
+            <!-- scenario-1 -->
+            <section data-section="1">
+                <h3 class="problemstatementSubheading">
+                    Scenario 1 — Entry Flow & App Structure
+                </h3>
+                <p class="scenario">
+                        When a user opens the app, the first screen immediately shows a map view. A single input field allows the user to enter a destination. The bottom section displays ride options, estimated prices, and time to arrival. Navigation is minimal, with only essential tabs accessible without leaving the map view.
+                        This structure must allow the user to complete the entire booking flow with **very few taps**, while keeping the map visible at all times.
+                </p><hr>
+            </section>
+
+            <!-- scenario-2 -->
+            <section data-section="2" class="d-none">
+                <h3 class="problemstatementSubheading">
+                    Scenario 2 — Live Specifications & Real-Time Behavior
+                </h3>
+                <p class="scenario">
+                    Once a ride is confirmed, the user sees a vehicle icon moving smoothly on the map. The estimated arrival time updates automatically without refreshing the screen. If traffic conditions change, the ETA adjusts gradually instead of jumping suddenly.
+                    The system must continuously receive location updates and reflect them visually without breaking animations or freezing the interface, even on slow networks.
+                </p><hr>
+            </section>
+
+            <!-- scenario-3 -->
+            <section data-section="3" class="d-none">
+                <h3 class="problemstatementSubheading">
+                Scenario 3 — Functional Logic & State Changes
+                </h3>
+                <p class="scenario">
+                    The ride progresses through multiple states: requested, driver assigned, arriving, in progress, completed. Each state unlocks or disables certain actions (cancel, contact driver, share trip).
+                    If the driver cancels or goes offline, the system must instantly reassign another driver without forcing the user to restart the process. All transitions must feel natural and predictable.
+                </p><hr>
+            </section>
+        
+
+            <!-- scenario-4 -->
+            <section data-section="4" class="d-none">
+                <p class="scenario">
+                    The interface uses a dark or muted map background to reduce eye strain. Primary actions (confirm ride, cancel, share) use high-contrast solid colors. Secondary information is shown using lighter text and subtle animations.
+                    Buttons are large, rounded, and placed within thumb-reach. No unnecessary icons, gradients, or decorative elements are used. The design must remain readable while the user is moving.
+                </p><hr>
+            </section>
+            <section>
+                <h3 class="problemstatementSubheading bg-danger">
+                How the System Actually Works 
+                </h3>
+                <ol class="scenario scenario-list">
+                    <li>User opens app and enters destination</li>
+                    <li>System estimates cost and time instantly</li>
+                    <li>User confirms request</li>
+                    <li>Nearby driver is assigned</li>
+                    <li>Live location updates stream continuously</li>
+                    <li>ETA recalculates dynamically</li>
+                    <li>Ride state updates until completion</li>
+                </ol><hr>
+            </section>
+
+
+            <!-------------- Rounds-Form-CodeEnter Sections----------- -->
+
+            <!-- Round-1 Question -->
+            <section class="round1" data-round="1">
+
+                <h3 class="problemstatementSubheading bg-secondary round1">
+                    ROUND 1 — Numerical
+                </h3>
+                <p class="scenario">
+                    At 9:00 AM, a ride request is confirmed.
+                    The estimated time for the driver to arrive is 12 minutes.
+                    The ride duration after pickup is estimated to be 28 minutes.<br>
+                <span class="question">
+                        Question
+                </span><br>
+                Calculate the total time from booking confirmation to ride completion.
+                Clearly explain which phases are included in the total time and why arrival time and travel time must be tracked separately.
+                </p><hr>
+        
+                <!-- Round Form -->
+                <form class="round-form" data-round="1">
+                    <h3 class="formHeading">Submit Form for Round-1</h3>
+                    <input type="text" name="teamName" class="teamName" placeholder="Team Name">
+                    <input type="text" name="teamLeader" class="teamLeader" placeholder="Team Leader">
+                    <input type="number" name="teamId" class="teamId" placeholder="Team Id/Number">
+                    <textarea name="answer" class="round-one-input" placeholder="Enter Your Answer"></textarea>
+                    <button type="submit" class="round-one-submitBtn btn btn-success">Submit!</button>
+                </form>
+
+                <!-- Round 2 Unlock Code -->
+                <div class="round-code-input-container d-none" data-unlock="2">
+                    <div class="codeCardContainer">
+                        <h1 class="text">Enter Round-2 Code!</h1>
+                        <input type="text" class="round-Two-Code">
+                        <button class="btn btn-secondary" class="unlock-btn">Enter</button>
+                        <p class="errorMsg text-danger"></p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Round 2 Question -->
+              <section class="round2 d-none" data-round="2">
+
+                <h3 class="problemstatementSubheading bg-secondary round2">
+                    ROUND 2 — Numerical
+                </h3>
+                <p class="scenario">
+                    At 9:00 AM, a ride request is confirmed.
+                    The estimated time for the driver to arrive is 12 minutes.
+                    The ride duration after pickup is estimated to be 28 minutes.<br>
+                <span class="question">
+                        Question
+                </span><br>
+                Calculate the total time from booking confirmation to ride completion.
+                Clearly explain which phases are included in the total time and why arrival time and travel time must be tracked separately.
+                </p><hr>
+        
+                <!-- Round Form -->
+                <form class="round-form d-none" data-round="2">
+                    <h3 class="formHeading">Submit Form for Round-2</h3>
+                    <input type="text" name="teamName" class="teamName" placeholder="Team Name">
+                    <input type="text" name="teamLeader" class="teamLeader" placeholder="Team Leader">
+                    <input type="number" name="teamId" class="teamId" placeholder="Team Id/Number">
+                    <textarea name="answer" class="round-two-input" placeholder="Enter Your Answer"></textarea>
+                    <button type="submit" class="round-two-submitBtn btn btn-success">Submit!</button>
+                </form>
+
+                <!-- Round 3 Unlock Code -->
+                <div class="round-code-input-container d-none" data-unlock="3">
+                    <div class="codeCardContainer">
+                        <h1 class="text">Enter Round-3 Code!</h1>
+                        <input type="text" class="round-Three-Code">
+                        <button class="btn btn-secondary" class="unlock-btn">Enter</button>
+                        <p class="errorMsg text-danger"></p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Round-3 Question -->
+              <section class="round3 d-none" data-round="3">
+
+                <h3 class="problemstatementSubheading bg-secondary round3">
+                    ROUND 3
+                </h3>
+                <p class="scenario">
+                    At 9:00 AM, a ride request is confirmed.
+                    The estimated time for the driver to arrive is 12 minutes.
+                    The ride duration after pickup is estimated to be 28 minutes.<br>
+                <span class="question">
+                        Question
+                </span><br>
+                Calculate the total time from booking confirmation to ride completion.
+                Clearly explain which phases are included in the total time and why arrival time and travel time must be tracked separately.
+                </p><hr>
+        
+                <!-- Round Form -->
+                <form class="round-form d-none" data-round="3">
+                    <h3 class="formHeading">Submit Form for Round-3</h3>
+                    <input type="text" name="teamName" class="teamName" placeholder="Team Name">
+                    <input type="text" name="teamLeader" class="teamLeader" placeholder="Team Leader">
+                    <input type="number" name="teamId" class="teamId" placeholder="Team Id/Number">
+                    <textarea name="answer" class="round-three-input" placeholder="Enter Your Answer"></textarea>
+                    <button type="submit" class="round-three-submitBtn btn btn-success">Submit!</button>
+                </form>
+
+                <!-- Round 4 Unlock Code -->
+                <div class="round-code-input-container d-none" data-unlock="4">
+                    <div class="codeCardContainer">
+                        <h1 class="text">Enter Round-4 Code!</h1>
+                        <input type="text" class="round-four-Code">
+                        <button class="btn btn-secondary" class="unlock-btn">Enter</button>
+                        <p class="errorMsg text-danger"></p>
+                    </div>
+                </div>
+            </section>
+
+             <!-- Round-4 Question -->
+              <section class="round4 d-none" data-round="4">
+
+                <h3 class="problemstatementSubheading bg-secondary round4">
+                    ROUND 4
+                </h3>
+                <p class="scenario">
+                    At 9:00 AM, a ride request is confirmed.
+                    The estimated time for the driver to arrive is 12 minutes.
+                    The ride duration after pickup is estimated to be 28 minutes.<br>
+                <span class="question">
+                        Question
+                </span><br>
+                Calculate the total time from booking confirmation to ride completion.
+                Clearly explain which phases are included in the total time and why arrival time and travel time must be tracked separately.
+                </p><hr>
+        
+                <!-- Round Form -->
+                <form class="round-form d-none" data-round="4">
+                    <h3 class="formHeading">Submit Form for Round-4</h3>
+                    <input type="text" name="teamName" class="teamName" placeholder="Team Name">
+                    <input type="text" name="teamLeader" class="teamLeader" placeholder="Team Leader">
+                    <input type="number" name="teamId" class="teamId" placeholder="Team Id/Number">
+                    <textarea name="answer" class="round-four-input" placeholder="Enter Your Answer"></textarea>
+                    <button type="submit" class="round-four-submitBtn btn btn-success">Submit!</button>
+                </form>
+              </section>
+            
+        </section>
+
+        <!-- ----------------------------------problem statement 7  -------------------------------->
+        <section class="problem d-none" data-problem="P7">
+            <!-- heading -->
+             <h2 class="problemstatementTitle text-center">
+                1 — REAL-TIME TRANSPORT & DELIVERY PLATFORM(Uber)<br>
+                (On-Demand Mobility & Live Tracking System)
+            </h2><hr>
+            <!-- story -->
+            <h3 class="problemstatementSubheading bg-danger">
+                Story / Problem Narrative
+            </h3>
+            <p class="scenario">
+                In large cities, people rely on on-demand transport for daily commuting and deliveries. The core challenge is not booking a ride, but trusting the system in real time knowing where the vehicle is, when it will arrive, and whether the system reacts correctly to delays, cancellations, or traffic changes.
+                To solve this, a real-time transport platform is introduced. Users request a ride or delivery, are matched with a nearby driver, and track the journey live on a map. The experience must feel instant, predictable, and calm, even though the system underneath is constantly changing.
+                The platform must manage live location updates, ETA recalculation, cancellations, and UI responsiveness, without overwhelming the user or exposing system complexity.
+            </p><hr>
+
+            <!-- -------scenarios------- -->
+             <h3 class="problemstatementSubheading bg-danger">
+                 App Structure Through Scenarios
+            </h3>
+            <!-- scenario-1 -->
+            <section data-section="1">
+                <h3 class="problemstatementSubheading">
+                    Scenario 1 — Entry Flow & App Structure
+                </h3>
+                <p class="scenario">
+                        When a user opens the app, the first screen immediately shows a map view. A single input field allows the user to enter a destination. The bottom section displays ride options, estimated prices, and time to arrival. Navigation is minimal, with only essential tabs accessible without leaving the map view.
+                        This structure must allow the user to complete the entire booking flow with **very few taps**, while keeping the map visible at all times.
+                </p><hr>
+            </section>
+
+            <!-- scenario-2 -->
+            <section data-section="2" class="d-none">
+                <h3 class="problemstatementSubheading">
+                    Scenario 2 — Live Specifications & Real-Time Behavior
+                </h3>
+                <p class="scenario">
+                    Once a ride is confirmed, the user sees a vehicle icon moving smoothly on the map. The estimated arrival time updates automatically without refreshing the screen. If traffic conditions change, the ETA adjusts gradually instead of jumping suddenly.
+                    The system must continuously receive location updates and reflect them visually without breaking animations or freezing the interface, even on slow networks.
+                </p><hr>
+            </section>
+
+            <!-- scenario-3 -->
+            <section data-section="3" class="d-none">
+                <h3 class="problemstatementSubheading">
+                Scenario 3 — Functional Logic & State Changes
+                </h3>
+                <p class="scenario">
+                    The ride progresses through multiple states: requested, driver assigned, arriving, in progress, completed. Each state unlocks or disables certain actions (cancel, contact driver, share trip).
+                    If the driver cancels or goes offline, the system must instantly reassign another driver without forcing the user to restart the process. All transitions must feel natural and predictable.
+                </p><hr>
+            </section>
+        
+
+            <!-- scenario-4 -->
+            <section data-section="4" class="d-none">
+                <p class="scenario">
+                    The interface uses a dark or muted map background to reduce eye strain. Primary actions (confirm ride, cancel, share) use high-contrast solid colors. Secondary information is shown using lighter text and subtle animations.
+                    Buttons are large, rounded, and placed within thumb-reach. No unnecessary icons, gradients, or decorative elements are used. The design must remain readable while the user is moving.
+                </p><hr>
+            </section>
+            <section>
+                <h3 class="problemstatementSubheading bg-danger">
+                How the System Actually Works 
+                </h3>
+                <ol class="scenario scenario-list">
+                    <li>User opens app and enters destination</li>
+                    <li>System estimates cost and time instantly</li>
+                    <li>User confirms request</li>
+                    <li>Nearby driver is assigned</li>
+                    <li>Live location updates stream continuously</li>
+                    <li>ETA recalculates dynamically</li>
+                    <li>Ride state updates until completion</li>
+                </ol><hr>
+            </section>
+
+
+            <!-------------- Rounds-Form-CodeEnter Sections----------- -->
+
+            <!-- Round-1 Question -->
+            <section class="round1" data-round="1">
+
+                <h3 class="problemstatementSubheading bg-secondary round1">
+                    ROUND 1 — Numerical
+                </h3>
+                <p class="scenario">
+                    At 9:00 AM, a ride request is confirmed.
+                    The estimated time for the driver to arrive is 12 minutes.
+                    The ride duration after pickup is estimated to be 28 minutes.<br>
+                <span class="question">
+                        Question
+                </span><br>
+                Calculate the total time from booking confirmation to ride completion.
+                Clearly explain which phases are included in the total time and why arrival time and travel time must be tracked separately.
+                </p><hr>
+        
+                <!-- Round Form -->
+                <form class="round-form" data-round="1">
+                    <h3 class="formHeading">Submit Form for Round-1</h3>
+                    <input type="text" name="teamName" class="teamName" placeholder="Team Name">
+                    <input type="text" name="teamLeader" class="teamLeader" placeholder="Team Leader">
+                    <input type="number" name="teamId" class="teamId" placeholder="Team Id/Number">
+                    <textarea name="answer" class="round-one-input" placeholder="Enter Your Answer"></textarea>
+                    <button type="submit" class="round-one-submitBtn btn btn-success">Submit!</button>
+                </form>
+
+                <!-- Round 2 Unlock Code -->
+                <div class="round-code-input-container d-none" data-unlock="2">
+                    <div class="codeCardContainer">
+                        <h1 class="text">Enter Round-2 Code!</h1>
+                        <input type="text" class="round-Two-Code">
+                        <button class="btn btn-secondary" class="unlock-btn">Enter</button>
+                        <p class="errorMsg text-danger"></p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Round 2 Question -->
+              <section class="round2 d-none" data-round="2">
+
+                <h3 class="problemstatementSubheading bg-secondary round2">
+                    ROUND 2 — Numerical
+                </h3>
+                <p class="scenario">
+                    At 9:00 AM, a ride request is confirmed.
+                    The estimated time for the driver to arrive is 12 minutes.
+                    The ride duration after pickup is estimated to be 28 minutes.<br>
+                <span class="question">
+                        Question
+                </span><br>
+                Calculate the total time from booking confirmation to ride completion.
+                Clearly explain which phases are included in the total time and why arrival time and travel time must be tracked separately.
+                </p><hr>
+        
+                <!-- Round Form -->
+                <form class="round-form d-none" data-round="2">
+                    <h3 class="formHeading">Submit Form for Round-2</h3>
+                    <input type="text" name="teamName" class="teamName" placeholder="Team Name">
+                    <input type="text" name="teamLeader" class="teamLeader" placeholder="Team Leader">
+                    <input type="number" name="teamId" class="teamId" placeholder="Team Id/Number">
+                    <textarea name="answer" class="round-two-input" placeholder="Enter Your Answer"></textarea>
+                    <button type="submit" class="round-two-submitBtn btn btn-success">Submit!</button>
+                </form>
+
+                <!-- Round 3 Unlock Code -->
+                <div class="round-code-input-container d-none" data-unlock="3">
+                    <div class="codeCardContainer">
+                        <h1 class="text">Enter Round-3 Code!</h1>
+                        <input type="text" class="round-Three-Code">
+                        <button class="btn btn-secondary" class="unlock-btn">Enter</button>
+                        <p class="errorMsg text-danger"></p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Round-3 Question -->
+              <section class="round3 d-none" data-round="3">
+
+                <h3 class="problemstatementSubheading bg-secondary round3">
+                    ROUND 3
+                </h3>
+                <p class="scenario">
+                    At 9:00 AM, a ride request is confirmed.
+                    The estimated time for the driver to arrive is 12 minutes.
+                    The ride duration after pickup is estimated to be 28 minutes.<br>
+                <span class="question">
+                        Question
+                </span><br>
+                Calculate the total time from booking confirmation to ride completion.
+                Clearly explain which phases are included in the total time and why arrival time and travel time must be tracked separately.
+                </p><hr>
+        
+                <!-- Round Form -->
+                <form class="round-form d-none" data-round="3">
+                    <h3 class="formHeading">Submit Form for Round-3</h3>
+                    <input type="text" name="teamName" class="teamName" placeholder="Team Name">
+                    <input type="text" name="teamLeader" class="teamLeader" placeholder="Team Leader">
+                    <input type="number" name="teamId" class="teamId" placeholder="Team Id/Number">
+                    <textarea name="answer" class="round-three-input" placeholder="Enter Your Answer"></textarea>
+                    <button type="submit" class="round-three-submitBtn btn btn-success">Submit!</button>
+                </form>
+
+                <!-- Round 4 Unlock Code -->
+                <div class="round-code-input-container d-none" data-unlock="4">
+                    <div class="codeCardContainer">
+                        <h1 class="text">Enter Round-4 Code!</h1>
+                        <input type="text" class="round-four-Code">
+                        <button class="btn btn-secondary" class="unlock-btn">Enter</button>
+                        <p class="errorMsg text-danger"></p>
+                    </div>
+                </div>
+            </section>
+
+             <!-- Round-4 Question -->
+              <section class="round4 d-none" data-round="4">
+
+                <h3 class="problemstatementSubheading bg-secondary round4">
+                    ROUND 4
+                </h3>
+                <p class="scenario">
+                    At 9:00 AM, a ride request is confirmed.
+                    The estimated time for the driver to arrive is 12 minutes.
+                    The ride duration after pickup is estimated to be 28 minutes.<br>
+                <span class="question">
+                        Question
+                </span><br>
+                Calculate the total time from booking confirmation to ride completion.
+                Clearly explain which phases are included in the total time and why arrival time and travel time must be tracked separately.
+                </p><hr>
+        
+                <!-- Round Form -->
+                <form class="round-form d-none" data-round="4">
+                    <h3 class="formHeading">Submit Form for Round-4</h3>
+                    <input type="text" name="teamName" class="teamName" placeholder="Team Name">
+                    <input type="text" name="teamLeader" class="teamLeader" placeholder="Team Leader">
+                    <input type="number" name="teamId" class="teamId" placeholder="Team Id/Number">
+                    <textarea name="answer" class="round-four-input" placeholder="Enter Your Answer"></textarea>
+                    <button type="submit" class="round-four-submitBtn btn btn-success">Submit!</button>
+                </form>
+              </section>
+            
+        </section>
+
+        <!-- ----------------------------------problem statement 8 -------------------------------->
+        <section class="problem d-none" data-problem="P8">
+            <!-- heading -->
+             <h2 class="problemstatementTitle text-center">
+                1 — REAL-TIME TRANSPORT & DELIVERY PLATFORM(Uber)<br>
+                (On-Demand Mobility & Live Tracking System)
+            </h2><hr>
+            <!-- story -->
+            <h3 class="problemstatementSubheading bg-danger">
+                Story / Problem Narrative
+            </h3>
+            <p class="scenario">
+                In large cities, people rely on on-demand transport for daily commuting and deliveries. The core challenge is not booking a ride, but trusting the system in real time knowing where the vehicle is, when it will arrive, and whether the system reacts correctly to delays, cancellations, or traffic changes.
+                To solve this, a real-time transport platform is introduced. Users request a ride or delivery, are matched with a nearby driver, and track the journey live on a map. The experience must feel instant, predictable, and calm, even though the system underneath is constantly changing.
+                The platform must manage live location updates, ETA recalculation, cancellations, and UI responsiveness, without overwhelming the user or exposing system complexity.
+            </p><hr>
+
+            <!-- -------scenarios------- -->
+             <h3 class="problemstatementSubheading bg-danger">
+                 App Structure Through Scenarios
+            </h3>
+            <!-- scenario-1 -->
+            <section data-section="1">
+                <h3 class="problemstatementSubheading">
+                    Scenario 1 — Entry Flow & App Structure
+                </h3>
+                <p class="scenario">
+                        When a user opens the app, the first screen immediately shows a map view. A single input field allows the user to enter a destination. The bottom section displays ride options, estimated prices, and time to arrival. Navigation is minimal, with only essential tabs accessible without leaving the map view.
+                        This structure must allow the user to complete the entire booking flow with **very few taps**, while keeping the map visible at all times.
+                </p><hr>
+            </section>
+
+            <!-- scenario-2 -->
+            <section data-section="2" class="d-none">
+                <h3 class="problemstatementSubheading">
+                    Scenario 2 — Live Specifications & Real-Time Behavior
+                </h3>
+                <p class="scenario">
+                    Once a ride is confirmed, the user sees a vehicle icon moving smoothly on the map. The estimated arrival time updates automatically without refreshing the screen. If traffic conditions change, the ETA adjusts gradually instead of jumping suddenly.
+                    The system must continuously receive location updates and reflect them visually without breaking animations or freezing the interface, even on slow networks.
+                </p><hr>
+            </section>
+
+            <!-- scenario-3 -->
+            <section data-section="3" class="d-none">
+                <h3 class="problemstatementSubheading">
+                Scenario 3 — Functional Logic & State Changes
+                </h3>
+                <p class="scenario">
+                    The ride progresses through multiple states: requested, driver assigned, arriving, in progress, completed. Each state unlocks or disables certain actions (cancel, contact driver, share trip).
+                    If the driver cancels or goes offline, the system must instantly reassign another driver without forcing the user to restart the process. All transitions must feel natural and predictable.
+                </p><hr>
+            </section>
+        
+
+            <!-- scenario-4 -->
+            <section data-section="4" class="d-none">
+                <p class="scenario">
+                    The interface uses a dark or muted map background to reduce eye strain. Primary actions (confirm ride, cancel, share) use high-contrast solid colors. Secondary information is shown using lighter text and subtle animations.
+                    Buttons are large, rounded, and placed within thumb-reach. No unnecessary icons, gradients, or decorative elements are used. The design must remain readable while the user is moving.
+                </p><hr>
+            </section>
+            <section>
+                <h3 class="problemstatementSubheading bg-danger">
+                How the System Actually Works 
+                </h3>
+                <ol class="scenario scenario-list">
+                    <li>User opens app and enters destination</li>
+                    <li>System estimates cost and time instantly</li>
+                    <li>User confirms request</li>
+                    <li>Nearby driver is assigned</li>
+                    <li>Live location updates stream continuously</li>
+                    <li>ETA recalculates dynamically</li>
+                    <li>Ride state updates until completion</li>
+                </ol><hr>
+            </section>
+
+
+            <!-------------- Rounds-Form-CodeEnter Sections----------- -->
+
+            <!-- Round-1 Question -->
+            <section class="round1" data-round="1">
+
+                <h3 class="problemstatementSubheading bg-secondary round1">
+                    ROUND 1 — Numerical
+                </h3>
+                <p class="scenario">
+                    At 9:00 AM, a ride request is confirmed.
+                    The estimated time for the driver to arrive is 12 minutes.
+                    The ride duration after pickup is estimated to be 28 minutes.<br>
+                <span class="question">
+                        Question
+                </span><br>
+                Calculate the total time from booking confirmation to ride completion.
+                Clearly explain which phases are included in the total time and why arrival time and travel time must be tracked separately.
+                </p><hr>
+        
+                <!-- Round Form -->
+                <form class="round-form" data-round="1">
+                    <h3 class="formHeading">Submit Form for Round-1</h3>
+                    <input type="text" name="teamName" class="teamName" placeholder="Team Name">
+                    <input type="text" name="teamLeader" class="teamLeader" placeholder="Team Leader">
+                    <input type="number" name="teamId" class="teamId" placeholder="Team Id/Number">
+                    <textarea name="answer" class="round-one-input" placeholder="Enter Your Answer"></textarea>
+                    <button type="submit" class="round-one-submitBtn btn btn-success">Submit!</button>
+                </form>
+
+                <!-- Round 2 Unlock Code -->
+                <div class="round-code-input-container d-none" data-unlock="2">
+                    <div class="codeCardContainer">
+                        <h1 class="text">Enter Round-2 Code!</h1>
+                        <input type="text" class="round-Two-Code">
+                        <button class="btn btn-secondary" class="unlock-btn">Enter</button>
+                        <p class="errorMsg text-danger"></p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Round 2 Question -->
+              <section class="round2 d-none" data-round="2">
+
+                <h3 class="problemstatementSubheading bg-secondary round2">
+                    ROUND 2 — Numerical
+                </h3>
+                <p class="scenario">
+                    At 9:00 AM, a ride request is confirmed.
+                    The estimated time for the driver to arrive is 12 minutes.
+                    The ride duration after pickup is estimated to be 28 minutes.<br>
+                <span class="question">
+                        Question
+                </span><br>
+                Calculate the total time from booking confirmation to ride completion.
+                Clearly explain which phases are included in the total time and why arrival time and travel time must be tracked separately.
+                </p><hr>
+        
+                <!-- Round Form -->
+                <form class="round-form d-none" data-round="2">
+                    <h3 class="formHeading">Submit Form for Round-2</h3>
+                    <input type="text" name="teamName" class="teamName" placeholder="Team Name">
+                    <input type="text" name="teamLeader" class="teamLeader" placeholder="Team Leader">
+                    <input type="number" name="teamId" class="teamId" placeholder="Team Id/Number">
+                    <textarea name="answer" class="round-two-input" placeholder="Enter Your Answer"></textarea>
+                    <button type="submit" class="round-two-submitBtn btn btn-success">Submit!</button>
+                </form>
+
+                <!-- Round 3 Unlock Code -->
+                <div class="round-code-input-container d-none" data-unlock="3">
+                    <div class="codeCardContainer">
+                        <h1 class="text">Enter Round-3 Code!</h1>
+                        <input type="text" class="round-Three-Code">
+                        <button class="btn btn-secondary" class="unlock-btn">Enter</button>
+                        <p class="errorMsg text-danger"></p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Round-3 Question -->
+              <section class="round3 d-none" data-round="3">
+
+                <h3 class="problemstatementSubheading bg-secondary round3">
+                    ROUND 3
+                </h3>
+                <p class="scenario">
+                    At 9:00 AM, a ride request is confirmed.
+                    The estimated time for the driver to arrive is 12 minutes.
+                    The ride duration after pickup is estimated to be 28 minutes.<br>
+                <span class="question">
+                        Question
+                </span><br>
+                Calculate the total time from booking confirmation to ride completion.
+                Clearly explain which phases are included in the total time and why arrival time and travel time must be tracked separately.
+                </p><hr>
+        
+                <!-- Round Form -->
+                <form class="round-form d-none" data-round="3">
+                    <h3 class="formHeading">Submit Form for Round-3</h3>
+                    <input type="text" name="teamName" class="teamName" placeholder="Team Name">
+                    <input type="text" name="teamLeader" class="teamLeader" placeholder="Team Leader">
+                    <input type="number" name="teamId" class="teamId" placeholder="Team Id/Number">
+                    <textarea name="answer" class="round-three-input" placeholder="Enter Your Answer"></textarea>
+                    <button type="submit" class="round-three-submitBtn btn btn-success">Submit!</button>
+                </form>
+
+                <!-- Round 4 Unlock Code -->
+                <div class="round-code-input-container d-none" data-unlock="4">
+                    <div class="codeCardContainer">
+                        <h1 class="text">Enter Round-4 Code!</h1>
+                        <input type="text" class="round-four-Code">
+                        <button class="btn btn-secondary" class="unlock-btn">Enter</button>
+                        <p class="errorMsg text-danger"></p>
+                    </div>
+                </div>
+            </section>
+
+             <!-- Round-4 Question -->
+              <section class="round4 d-none" data-round="4">
+
+                <h3 class="problemstatementSubheading bg-secondary round4">
+                    ROUND 4
+                </h3>
+                <p class="scenario">
+                    At 9:00 AM, a ride request is confirmed.
+                    The estimated time for the driver to arrive is 12 minutes.
+                    The ride duration after pickup is estimated to be 28 minutes.<br>
+                <span class="question">
+                        Question
+                </span><br>
+                Calculate the total time from booking confirmation to ride completion.
+                Clearly explain which phases are included in the total time and why arrival time and travel time must be tracked separately.
+                </p><hr>
+        
+                <!-- Round Form -->
+                <form class="round-form d-none" data-round="4">
+                    <h3 class="formHeading">Submit Form for Round-4</h3>
+                    <input type="text" name="teamName" class="teamName" placeholder="Team Name">
+                    <input type="text" name="teamLeader" class="teamLeader" placeholder="Team Leader">
+                    <input type="number" name="teamId" class="teamId" placeholder="Team Id/Number">
+                    <textarea name="answer" class="round-four-input" placeholder="Enter Your Answer"></textarea>
+                    <button type="submit" class="round-four-submitBtn btn btn-success">Submit!</button>
+                </form>
+              </section>
+            
+        </section>
+
+        <!----------------- Problem statement-9 ------------------->
+        <section class="problem d-none" data-problem="P9">
+            <!-- heading -->
+             <h2 class="problemstatementTitle text-center">
+                1 — REAL-TIME TRANSPORT & DELIVERY PLATFORM(Uber)<br>
+                (On-Demand Mobility & Live Tracking System)
+            </h2><hr>
+            <!-- story -->
+            <h3 class="problemstatementSubheading bg-danger">
+                Story / Problem Narrative
+            </h3>
+            <p class="scenario">
+                In large cities, people rely on on-demand transport for daily commuting and deliveries. The core challenge is not booking a ride, but trusting the system in real time knowing where the vehicle is, when it will arrive, and whether the system reacts correctly to delays, cancellations, or traffic changes.
+                To solve this, a real-time transport platform is introduced. Users request a ride or delivery, are matched with a nearby driver, and track the journey live on a map. The experience must feel instant, predictable, and calm, even though the system underneath is constantly changing.
+                The platform must manage live location updates, ETA recalculation, cancellations, and UI responsiveness, without overwhelming the user or exposing system complexity.
+            </p><hr>
+
+            <!-- -------scenarios------- -->
+             <h3 class="problemstatementSubheading bg-danger">
+                 App Structure Through Scenarios
+            </h3>
+            <!-- scenario-1 -->
+            <section data-section="1">
+                <h3 class="problemstatementSubheading">
+                    Scenario 1 — Entry Flow & App Structure
+                </h3>
+                <p class="scenario">
+                        When a user opens the app, the first screen immediately shows a map view. A single input field allows the user to enter a destination. The bottom section displays ride options, estimated prices, and time to arrival. Navigation is minimal, with only essential tabs accessible without leaving the map view.
+                        This structure must allow the user to complete the entire booking flow with **very few taps**, while keeping the map visible at all times.
+                </p><hr>
+            </section>
+
+            <!-- scenario-2 -->
+            <section data-section="2" class="d-none">
+                <h3 class="problemstatementSubheading">
+                    Scenario 2 — Live Specifications & Real-Time Behavior
+                </h3>
+                <p class="scenario">
+                    Once a ride is confirmed, the user sees a vehicle icon moving smoothly on the map. The estimated arrival time updates automatically without refreshing the screen. If traffic conditions change, the ETA adjusts gradually instead of jumping suddenly.
+                    The system must continuously receive location updates and reflect them visually without breaking animations or freezing the interface, even on slow networks.
+                </p><hr>
+            </section>
+
+            <!-- scenario-3 -->
+            <section data-section="3" class="d-none">
+                <h3 class="problemstatementSubheading">
+                Scenario 3 — Functional Logic & State Changes
+                </h3>
+                <p class="scenario">
+                    The ride progresses through multiple states: requested, driver assigned, arriving, in progress, completed. Each state unlocks or disables certain actions (cancel, contact driver, share trip).
+                    If the driver cancels or goes offline, the system must instantly reassign another driver without forcing the user to restart the process. All transitions must feel natural and predictable.
+                </p><hr>
+            </section>
+        
+
+            <!-- scenario-4 -->
+            <section data-section="4" class="d-none">
+                <p class="scenario">
+                    The interface uses a dark or muted map background to reduce eye strain. Primary actions (confirm ride, cancel, share) use high-contrast solid colors. Secondary information is shown using lighter text and subtle animations.
+                    Buttons are large, rounded, and placed within thumb-reach. No unnecessary icons, gradients, or decorative elements are used. The design must remain readable while the user is moving.
+                </p><hr>
+            </section>
+            <section>
+                <h3 class="problemstatementSubheading bg-danger">
+                How the System Actually Works 
+                </h3>
+                <ol class="scenario scenario-list">
+                    <li>User opens app and enters destination</li>
+                    <li>System estimates cost and time instantly</li>
+                    <li>User confirms request</li>
+                    <li>Nearby driver is assigned</li>
+                    <li>Live location updates stream continuously</li>
+                    <li>ETA recalculates dynamically</li>
+                    <li>Ride state updates until completion</li>
+                </ol><hr>
+            </section>
+
+
+            <!-------------- Rounds-Form-CodeEnter Sections----------- -->
+
+            <!-- Round-1 Question -->
+            <section class="round1" data-round="1">
+
+                <h3 class="problemstatementSubheading bg-secondary round1">
+                    ROUND 1 — Numerical
+                </h3>
+                <p class="scenario">
+                    At 9:00 AM, a ride request is confirmed.
+                    The estimated time for the driver to arrive is 12 minutes.
+                    The ride duration after pickup is estimated to be 28 minutes.<br>
+                <span class="question">
+                        Question
+                </span><br>
+                Calculate the total time from booking confirmation to ride completion.
+                Clearly explain which phases are included in the total time and why arrival time and travel time must be tracked separately.
+                </p><hr>
+        
+                <!-- Round Form -->
+                <form class="round-form" data-round="1">
+                    <h3 class="formHeading">Submit Form for Round-1</h3>
+                    <input type="text" name="teamName" class="teamName" placeholder="Team Name">
+                    <input type="text" name="teamLeader" class="teamLeader" placeholder="Team Leader">
+                    <input type="number" name="teamId" class="teamId" placeholder="Team Id/Number">
+                    <textarea name="answer" id="round-one-input" placeholder="Enter Your Answer"></textarea>
+                    <button type="submit" class="round-one-submitBtn btn btn-success">Submit!</button>
+                </form>
+
+                <!-- Round 2 Unlock Code -->
+                <div class="round-code-input-container d-none" data-unlock="2">
+                    <div class="codeCardContainer">
+                        <h1 class="text">Enter Round-2 Code!</h1>
+                        <input type="text" id="round-Two-Code">
+                        <button class="btn btn-secondary" class="unlock-btn">Enter</button>
+                        <p class="errorMsg text-danger"></p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Round 2 Question -->
+              <section class="round2 d-none" data-round="2">
+
+                <h3 class="problemstatementSubheading bg-secondary round2">
+                    ROUND 2 — Numerical
+                </h3>
+                <p class="scenario">
+                    At 9:00 AM, a ride request is confirmed.
+                    The estimated time for the driver to arrive is 12 minutes.
+                    The ride duration after pickup is estimated to be 28 minutes.<br>
+                <span class="question">
+                        Question
+                </span><br>
+                Calculate the total time from booking confirmation to ride completion.
+                Clearly explain which phases are included in the total time and why arrival time and travel time must be tracked separately.
+                </p><hr>
+        
+                <!-- Round Form -->
+                <form class="round-form d-none" data-round="2">
+                    <h3 class="formHeading">Submit Form for Round-2</h3>
+                    <input type="text" name="teamName" class="teamName" placeholder="Team Name">
+                    <input type="text" name="teamLeader" class="teamLeader" placeholder="Team Leader">
+                    <input type="number" name="teamId" class="teamId" placeholder="Team Id/Number">
+                    <textarea name="answer" id="round-two-input" placeholder="Enter Your Answer"></textarea>
+                    <button type="submit" class="round-two-submitBtn btn btn-success">Submit!</button>
+                </form>
+
+                <!-- Round 3 Unlock Code -->
+                <div class="round-code-input-container d-none" data-unlock="3">
+                    <div class="codeCardContainer">
+                        <h1 class="text">Enter Round-3 Code!</h1>
+                        <input type="text" id="round-Three-Code">
+                        <button class="btn btn-secondary" class="unlock-btn">Enter</button>
+                        <p class="errorMsg text-danger"></p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Round-3 Question -->
+              <section class="round3 d-none" data-round="3">
+
+                <h3 class="problemstatementSubheading bg-secondary round3">
+                    ROUND 3
+                </h3>
+                <p class="scenario">
+                    At 9:00 AM, a ride request is confirmed.
+                    The estimated time for the driver to arrive is 12 minutes.
+                    The ride duration after pickup is estimated to be 28 minutes.<br>
+                <span class="question">
+                        Question
+                </span><br>
+                Calculate the total time from booking confirmation to ride completion.
+                Clearly explain which phases are included in the total time and why arrival time and travel time must be tracked separately.
+                </p><hr>
+        
+                <!-- Round Form -->
+                <form class="round-form d-none" data-round="3">
+                    <h3 class="formHeading">Submit Form for Round-3</h3>
+                    <input type="text" name="teamName" class="teamName" placeholder="Team Name">
+                    <input type="text" name="teamLeader" class="teamLeader" placeholder="Team Leader">
+                    <input type="number" name="teamId" class="teamId" placeholder="Team Id/Number">
+                    <textarea name="answer" id="round-three-input" placeholder="Enter Your Answer"></textarea>
+                    <button type="submit" class="round-three-submitBtn btn btn-success">Submit!</button>
+                </form>
+
+                <!-- Round 4 Unlock Code -->
+                <div class="round-code-input-container d-none" data-unlock="4">
+                    <div class="codeCardContainer">
+                        <h1 class="text">Enter Round-4 Code!</h1>
+                        <input type="text" id="round-four-Code">
+                        <button class="btn btn-secondary" class="unlock-btn">Enter</button>
+                        <p class="errorMsg text-danger"></p>
+                    </div>
+                </div>
+            </section>
+
+             <!-- Round-4 Question -->
+              <section class="round4 d-none" data-round="4">
+
+                <h3 class="problemstatementSubheading bg-secondary round4">
+                    ROUND 4
+                </h3>
+                <p class="scenario">
+                    At 9:00 AM, a ride request is confirmed.
+                    The estimated time for the driver to arrive is 12 minutes.
+                    The ride duration after pickup is estimated to be 28 minutes.<br>
+                <span class="question">
+                        Question
+                </span><br>
+                Calculate the total time from booking confirmation to ride completion.
+                Clearly explain which phases are included in the total time and why arrival time and travel time must be tracked separately.
+                </p><hr>
+        
+                <!-- Round Form -->
+                <form class="round-form d-none" data-round="4">
+                    <h3 class="formHeading">Submit Form for Round-4</h3>
+                    <input type="text" name="teamName" class="teamName" placeholder="Team Name">
+                    <input type="text" name="teamLeader" class="teamLeader" placeholder="Team Leader">
+                    <input type="number" name="teamId" class="teamId" placeholder="Team Id/Number">
+                    <textarea name="answer" id="round-four-input" placeholder="Enter Your Answer"></textarea>
+                    <button type="submit" class="round-four-submitBtn btn btn-success">Submit!</button>
+                </form>
+              </section>
+            
+        </section>
+    </section>
+    <script src="script.js"></script>
+</body>
+</html>
