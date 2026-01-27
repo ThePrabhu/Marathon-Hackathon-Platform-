@@ -1,60 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=BBH+Bartle&family=Bungee&family=Momo+Trust+Display&family=Roboto:ital,wght@0,100..900;1,100..900&family=Story+Script&family=Unbounded:wght@200..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=BBH+Bartle&family=Bungee&family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&family=Momo+Trust+Display&family=Roboto:ital,wght@0,100..900;1,100..900&family=Story+Script&family=Unbounded:wght@200..900&display=swap');
+
 *{
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-}
-
-/* index.html styling */
-
-.Imgcontainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;   /* full viewport height */
-    width: 100vw;    /* full viewport width */
-    overflow: hidden; /* prevent scrollbars */
-    animation: splash 1s linear 1s 1;
-}
-
-.Imgcontainer img {
-    max-width: 30%;   /* scale down if too wide */
-    max-height: 100%;  /* scale down if too tall */
-    object-fit: contain; /* keep aspect ratio */
-    overflow: hidden;
-}
-
-@keyframes splash {
-  100%{
-    transform: scale(2);
-  }
-}
-
-.statementContainer{
-    width: 95vw;
-}
-
-.statement{
-    width: 100%;
-    margin : 10px 0px 10px 10px ;
-    border : 2px solid black;
-    border-radius: 10px;
-    padding: 30px;
-    font-size: 20px;
-    font-weight: bolder;
-    background-image: linear-gradient(to right , #800000, #ffffff);
-    cursor: pointer;
-     font-family: 'Libre Baskerville', serif;
-
-}
-
-
-.statement a{
-    color: black;
-}
-.statement a:hover{
-    color: black;
 }
 
 .card-container{
@@ -64,20 +14,67 @@
     align-items: center;
     height: 100vh;
     width: 100vw;
+    background-image: radial-gradient(#b4a3a3 , #800000 );
 }
 
 .code-input-container{
     display: flex;
     flex-direction: column;
-    align-items: center;
+    text-align: center;
+    /* align-items: center; */
     justify-content: center;
     font-family: Bungee;
     gap : 10px;
-    width : 90%;
-    height: 300px;
+    /* width : 90%;
+    height: 300px; */
     border-radius: 10px;
-    background-image: linear-gradient(to bottom , #800000, #ffff);
-    border: 2px solid black;
+    /* background-image: linear-gradient(to bottom , #800000, #ffff); */
+    /* border: 2px solid black; */
+}
+
+.code-input-heading{
+    font-size: 20px;
+    color: #800000;
+}
+
+.problem-code{
+    height: 80px;
+    width: 750px;
+    border-radius: 20px;
+    border: none;
+    text-align: center;
+}
+
+.problem-code {
+    transition: box-shadow 0.35s ease, transform 0.25s ease;
+}
+
+/* GLOW WHEN FORM IS HOVERED */
+.problem-code:hover {
+    box-shadow:
+        0 0 12px rgba(128, 0, 0, 0.35),
+        0 0 28px rgba(128, 0, 0, 0.25),
+        0 0 24px rgba(128, 0, 0, 0.4);
+    transform: translateY(-2px);
+}
+
+.problem-code-submit-btn{
+    align-self: flex-end;
+}
+
+/* GLOW ON HOVER */
+.problem-code-submit-btn:hover {
+    box-shadow:
+        0 0 8px rgba(128, 0, 0, 0.6),
+        0 0 16px rgba(128, 0, 0, 0.5),
+        0 0 24px rgba(128, 0, 0, 0.4);
+    transform: translateY(-1px);
+}
+
+.problem-code-submit-btn:active {
+    box-shadow:
+        0 0 6px rgba(128, 0, 0, 0.6);
+    transform: translateY(0);
 }
 
 
@@ -225,7 +222,7 @@
     }
 
     .problem-code{
-        width: 20px;
+        width: 140px;
     }
 }
 
