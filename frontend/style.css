@@ -122,6 +122,7 @@
 }
 
 
+
 .round-code-input-container{
     display: flex;
     flex-direction: column;
@@ -135,6 +136,35 @@
     background-image: linear-gradient(to bottom , #800000, #ffff);
     border: 2px solid black;
 }
+
+.codeCardContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* align-content: center; */
+    gap : 10px;
+
+}
+
+@media (max-width : 670px){
+    .codeCardContainer{
+       font-size: 20px;
+       text-align: center;
+    }
+}
+
+@media (max-width : 480px){
+    .codeCardContainer>.text{
+       font-size: 25px;
+    }
+
+    .codeCardContainer{
+        align-items: center;
+    }
+}
+
+
+
 
 /* Skew + fade animation */
 .skew-exit {
@@ -178,4 +208,25 @@
     transform: scale(0.95);
   }
 }
+
+@media (max-width : 950px){
+    .code-input-container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+}
+
+@media (max-width : 540px){
+    .code-input-heading{
+        font-size: 25px;
+    }
+
+    .problem-code{
+        width: 20px;
+    }
+}
+
 
