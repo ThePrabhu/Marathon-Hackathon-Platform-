@@ -7,277 +7,446 @@
     box-sizing: border-box;
 }
 
-.card-container{
+/* ===============================
+   ENTRY GATE — PREMIUM DESIGN
+================================ */
+
+.card-container {
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+
     width: 100vw;
-    background-image: radial-gradient(#b4a3a3 , #800000 );
+    height: 100vh;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #a4161a 0%,
+            #800000 45%,
+            #4d0000 100%
+        );
+
+    position: relative;
+    overflow: hidden;
 }
 
-.code-input-container{
+/* SUBTLE GRAIN / DEPTH */
+.card-container::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,0.05),
+            rgba(0,0,0,0.35)
+        );
+    pointer-events: none;
+}
+
+/* ===============================
+   GLASS CARD
+================================ */
+
+.code-input-container {
+    position: relative;
+    z-index: 2;
+
     display: flex;
     flex-direction: column;
-    text-align: center;
-    /* align-items: center; */
-    justify-content: center;
-    font-family: Bungee;
-    gap : 10px;
-    /* width : 90%;
-    height: 300px; */
-    border-radius: 10px;
-    /* background-image: linear-gradient(to bottom , #800000, #ffff); */
-    /* border: 2px solid black; */
+    align-items: center;
+    gap: 24px;
+
+    padding: 48px 56px;
+
+    border-radius: 24px;
+
+    background: rgba(255, 255, 255, 0.08);
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
+
+    box-shadow:
+        0 20px 60px rgba(0,0,0,0.35),
+        inset 0 0 0 1px rgba(255,255,255,0.15);
+
+    animation: gateEnter 0.8s ease-out forwards;
 }
 
-.code-input-heading{
+@keyframes gateEnter {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.96);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* ===============================
+   HEADING
+================================ */
+
+.code-input-heading {
+    font-family: "Bungee", sans-serif;
     font-size: 20px;
-    color: #800000;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+
+    color: #ffffff;
+
+    opacity: 0.9;
 }
 
-.problem-code{
-    height: 80px;
-    width: 750px;
-    border-radius: 20px;
-    border: none;
-    text-align: center;
-}
+/* ===============================
+   INPUT FIELD
+================================ */
 
 .problem-code {
-    transition: box-shadow 0.35s ease, transform 0.25s ease;
+    width: 520px;
+    max-width: 90vw;
+    height: 64px;
+
+    border-radius: 14px;
+    border: none;
+
+    font-size: 18px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-align: center;
+
+    outline: none;
+
+    background: rgba(255,255,255,0.95);
+    color: #800000;
+
+    box-shadow:
+        0 8px 20px rgba(0,0,0,0.25),
+        inset 0 0 0 2px rgba(128,0,0,0.15);
+
+    transition:
+        box-shadow 0.3s ease,
+        transform 0.25s ease;
 }
 
-/* GLOW WHEN FORM IS HOVERED */
-.problem-code:hover {
-    box-shadow:
-        0 0 12px rgba(128, 0, 0, 0.35),
-        0 0 28px rgba(128, 0, 0, 0.25),
-        0 0 24px rgba(128, 0, 0, 0.4);
+.problem-code::placeholder {
+    color: rgba(128,0,0,0.5);
+}
+
+.problem-code:focus {
     transform: translateY(-2px);
-}
-
-.problem-code-submit-btn{
-    align-self: flex-end;
-}
-
-/* GLOW ON HOVER */
-.problem-code-submit-btn:hover {
     box-shadow:
-        0 0 8px rgba(128, 0, 0, 0.6),
-        0 0 16px rgba(128, 0, 0, 0.5),
-        0 0 24px rgba(128, 0, 0, 0.4);
-    transform: translateY(-1px);
+        0 12px 30px rgba(0,0,0,0.35),
+        inset 0 0 0 2px #800000;
+}
+
+/* ===============================
+   SUBMIT BUTTON
+================================ */
+
+.problem-code-submit-btn {
+    margin-top: 8px;
+
+    padding: 14px 42px;
+
+    font-family: "Bungee", sans-serif;
+    font-size: 14px;
+    letter-spacing: 2px;
+
+    border-radius: 999px;
+    border: none;
+
+    cursor: pointer;
+
+    background: linear-gradient(
+        135deg,
+        #ffffff,
+        #f2f2f2
+    );
+
+    color: #800000;
+
+    box-shadow:
+        0 10px 25px rgba(0,0,0,0.3);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.problem-code-submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow:
+        0 14px 35px rgba(0,0,0,0.45);
 }
 
 .problem-code-submit-btn:active {
-    box-shadow:
-        0 0 6px rgba(128, 0, 0, 0.6);
     transform: translateY(0);
+    box-shadow:
+        0 8px 20px rgba(0,0,0,0.3);
 }
 
+/* ===============================
+   ERROR MESSAGE
+================================ */
 
-/* problem statement section styling */
-.problem{
-    display: flex;
-    flex-direction: column;
-    margin: auto;
-    width : 80vw;
-    border : 10px solid black;
-    border-radius: 10px;
-    padding: 10px;
+.errorMsg {
+    margin-top: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #ffdddd;
+    text-shadow: 0 0 6px rgba(0,0,0,0.4);
 }
 
-.scenario{
-    font-size: 20px;
-    font-weight: 500;
-}
-
-.scenario-list{
-    padding: 10px 20px;
-}
-
-.question{
-    font-weight: 900;
-}
-
-.round-form{
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    justify-content: center;
-    gap : 10px;
-    height: 400px;
-    width: 60VW;
-    border-radius: 30px;
-    background-image: radial-gradient(#800000, #fff);
-    margin: auto;
-    border: 2px solid black;
-    padding: 10px;
-    font-family: Bungee;
-}
-
-
-
-.round-code-input-container{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-family: Bungee;
-    gap : 10px;
-    width : 100%;
-    height: 300px;
-    border-radius: 10px;
-    background-image: linear-gradient(to bottom , #800000, #ffff);
-    border: 2px solid black;
-}
-
-.codeCardContainer{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    /* align-content: center; */
-    gap : 10px;
-
-}
-
-@media (max-width : 670px){
-    .codeCardContainer{
-       font-size: 20px;
-       text-align: center;
-    }
-}
-
-@media (max-width : 480px){
-    .codeCardContainer>.text{
-       font-size: 25px;
-    }
-
-    .codeCardContainer{
-        align-items: center;
-    }
-}
-
-
-
-
-/* Skew + fade animation */
-.skew-exit {
-  animation: skewOut 0.5s ease forwards;
-}
-
-@keyframes skewOut {
-  0% {
-    transform: skewX(0deg) scale(1);
-    opacity: 1;
-  }
-  100% {
-    transform: skewX(-8deg) scale(0.95);
-    opacity: 0;
-  }
-}
-
-.fade-slide-out {
-  animation: fadeSlide 0.5s ease forwards;
-}
-
-.form-submit-anim {
-  animation: popFade 0.4s ease forwards;
-}
-
-.btn-loading {
-  pointer-events: none;
-  opacity: 0.7;
-}
-
-@keyframes fadeSlide {
-  to {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-}
-
-@keyframes popFade {
-  to {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-}
-
-@media (max-width : 950px){
-    .code-input-container{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-    }
-}
-
-@media (max-width : 540px){
-    .code-input-heading{
-        font-size: 25px;
-    }
-
-    .problem-code{
-        width: 140px;
-    }
-}
-
-
-/* ================= BASIC RESET ================= */
+/* ================= RESET ================= */
 body {
-  margin: 0;
   overflow-x: hidden;
+  background: #111;
+  font-family: "Libre Baskerville", serif;
 }
 
-/* ================= MAIN WRAPPER ================= */
+
+
+/* ================= MAIN PROBLEM WRAPPER ================= */
 .problem {
-  position: relative;
+  width: 90vw;
+  margin: 80px auto;
+  padding: 0;
+
+  border-radius: 22px;
+  background: #f9f9f9;
+
+  box-shadow:
+    0 40px 80px rgba(0,0,0,0.28);
 }
 
-/* ================= STICKY SECTIONS ================= */
+/* ================= STICKY CARD SYSTEM ================= */
 .section_one,
 .section_two,
 .section_three,
 .section_four {
   position: sticky;
   top: 0;
-  min-height: 100vh;     /* full screen */
-  padding: 24px;
-  box-sizing: border-box;
 
-  background: #ffffff;
+  min-height: 100vh;
+  padding: 70px 60px;
+
+  border-radius: 26px;
+  margin-bottom: 120px;
+
+  background: rgba(255,255,255,0.96);
+  backdrop-filter: blur(8px);
+
+  box-shadow:
+    0 30px 70px rgba(0,0,0,0.18);
+
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease;
 }
 
-/* ================= STACKING ORDER ================= */
-/* Important so next section comes OVER previous */
-.section_one { z-index: 1; }
+/* .section_four {
+  position: sticky;
+  top: 0;
+
+
+  padding: 70px 60px;
+
+  border-radius: 26px;
+  margin-bottom: 120px;
+
+  background: rgba(255,255,255,0.96);
+  backdrop-filter: blur(8px);
+
+  box-shadow:
+    0 30px 70px rgba(0,0,0,0.18);
+
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease;
+} */
+
+.section_four {
+  position: relative;     /* 🔑 NOT STICKY */
+  top: auto;
+
+  min-height: auto;
+  padding: 70px 60px;
+  margin-bottom: 120px;
+
+  border-radius: 28px;
+  background: #ffffff;
+
+  box-shadow:
+    0 25px 70px rgba(0,0,0,0.25);
+}
+
+/* Stacking order */
+.section_one   { z-index: 1; }
 .section_two   { z-index: 2; }
 .section_three { z-index: 3; }
 .section_four  { z-index: 4; }
 
-/* ================= OPTIONAL: visual separation ================= */
-.section_two   { background: #fafafa; }
-.section_four  { background: #f6f6f6; }
-
-/* ================= SMOOTH EXPERIENCE ================= */
-html {
-  scroll-behavior: smooth;
+/* Subtle section identity (NOT loud) */
+.section_one {
+  background:
+    linear-gradient(180deg, #ffffff 0%, #fff1f1 100%);
 }
 
-.section_one{
-    background-image: radial-gradient(white , red);
+.section_two {
+  background:
+    linear-gradient(180deg, #ffffff 0%, #f7f7f7 100%);
 }
 
+.section_three {
+  background:
+    linear-gradient(180deg, #ffffff 0%, #f3f3f3 100%);
+}
 
+.section_four {
+  background:
+    linear-gradient(180deg, #ffffff 0%, #ededed 100%);
+}
 
+/* ================= TEXT SYSTEM ================= */
+.problemstatementTitle {
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  color: #1a1a1a;
+  margin-bottom: 28px;
+}
 
+.problemstatementSubheading {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
 
+  color: #800000;
+  margin-bottom: 16px;
 
+  border-left: 4px solid #800000;
+  padding-left: 12px;
+}
 
+.scenario {
+  font-size: 18px;
+  line-height: 1.7;
+  color: #333;
+  margin-bottom: 12px;
+}
 
+.scenario-list {
+  padding-left: 26px;
+  font-size: 18px;
+  line-height: 1.7;
+  color: #333;
+}
 
+.scenario-list li {
+  margin-bottom: 8px;
+}
+
+.question {
+  display: inline-block;
+  margin-top: 12px;
+  font-weight: 800;
+  color: #111;
+}
+
+/* ================= ROUND FORMS ================= */
+.round-form {
+  margin: 70px auto;
+  padding: 36px;
+  width: 60vw;
+
+  border-radius: 26px;
+  background:
+    linear-gradient(135deg, #ffffff, #f6f6f6);
+
+  box-shadow:
+    0 25px 60px rgba(0,0,0,0.22);
+
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+
+  font-family: Bungee;
+}
+
+.round-form input,
+.round-form textarea {
+  padding: 14px;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  outline: none;
+
+  font-size: 15px;
+  background: #fff;
+
+  transition: border 0.25s ease, box-shadow 0.25s ease;
+}
+
+.round-form input:focus,
+.round-form textarea:focus {
+  border-color: #800000;
+  box-shadow: 0 0 0 3px rgba(128,0,0,0.18);
+}
+
+.round-form button {
+  margin-top: 16px;
+  border-radius: 14px;
+  padding: 14px;
+
+  background: #800000;
+  color: #fff;
+  font-weight: 700;
+
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.round-form button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(128,0,0,0.35);
+}
+
+/* ================= ROUND UNLOCK CARD ================= */
+.round-code-input-container {
+  width: 100%;
+  height: 320px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background:
+    linear-gradient(
+      180deg,
+      #ffffff 0%,
+      #f3f3f3 100%
+    );
+
+  border-radius: 22px;
+  box-shadow:
+    0 25px 60px rgba(0,0,0,0.22);
+}
+
+.codeCardContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  text-align: center;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 900px) {
+  .problem {
+    width: 94vw;
+  }
+
+  .round-form {
+    width: 90vw;
+  }
+}
 
