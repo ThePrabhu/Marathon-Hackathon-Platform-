@@ -1,31 +1,37 @@
-/*************************************************
- * API BASE (LOCAL vs DEPLOYED)
- *************************************************/
+/*****************
+ * API BASE (ONLY FOR CODE VERIFICATION – unchanged)
+ *****************/
 const API_BASE =
   location.hostname === "localhost"
     ? "http://localhost:3000"
     : "https://marathon-hackathon-platform-1.onrender.com";
 
-/*************************************************
+/*****************
+ * N8N PRODUCTION WEBHOOK (IMPORTANT)
+ *****************/
+const N8N_WEBHOOK_URL =
+  "https://ujwalc54.app.n8n.cloud/webhook/submit-answer";
+
+/*****************
  * GLOBAL STATE
- *************************************************/
+ *****************/
 let currentProblemId = null;
 let currentRound = 1;
 
-/*************************************************
+/*****************
  * LOAD SELECTED PROBLEM
- *************************************************/
+ *****************/
 currentProblemId = localStorage.getItem("selectedProblem");
 
-/*************************************************
+/*****************
  * HELPERS
- *************************************************/
+ *****************/
 const show = el => el.classList.remove("d-none");
 const hide = el => el.classList.add("d-none");
 
-/*************************************************
- * PROBLEM CODE ENTRY
- *************************************************/
+/*****************
+ * PROBLEM CODE ENTRY (UNCHANGED)
+ *****************/
 const problemCodeInput = document.querySelector(".code-input-container input");
 const problemCodeBtn = document.querySelector(".problem-code-submit-btn");
 const problemCodeError = document.querySelector(".code-input-container .errorMsg");
@@ -59,33 +65,39 @@ problemCodeBtn.addEventListener("click", () => {
     .then(data => {
       if (!data.success) {
         problemCodeError.textContent = "Invalid code.";
-        problemCodeBtn.classList.remove("btn-loading");
         return;
       }
 
       problemCodeError.textContent = "";
       cardContainer.classList.add("fade-slide-out");
 
-      cardContainer.addEventListener("animationend", () => {
-        hide(cardContainer);
-        document.querySelectorAll(".problem").forEach(hide);
-        show(document.querySelector(`.problem[data-problem="${currentProblemId}"]`));
-      }, { once: true });
+      cardContainer.addEventListener(
+        "animationend",
+        () => {
+          hide(cardContainer);
+          document.querySelectorAll(".problem").forEach(hide);
+          show(
+            document.querySelector(
+              `.problem[data-problem="${currentProblemId}"]`
+            )
+          );
+        },
+        { once: true }
+      );
     })
-    .catch(err => {
-      console.error(err);
-      problemCodeError.textContent = "Network error. Backend waking up.";
+    .catch(() => {
+      problemCodeError.textContent = "Network error.";
     })
     .finally(() => {
       problemCodeBtn.classList.remove("btn-loading");
     });
 });
 
-/*************************************************
- * ROUND FORM SUBMISSION
- *************************************************/
+/*****************
+ * ROUND FORM SUBMISSION (N8N INTEGRATION ADDED)
+ *****************/
 document.querySelectorAll(".round-form").forEach(form => {
-  form.addEventListener("submit", e => {
+  form.addEventListener("submit", async e => {
     e.preventDefault();
 
     let valid = true;
@@ -100,26 +112,53 @@ document.querySelectorAll(".round-form").forEach(form => {
 
     if (!valid) return;
 
-    form.classList.add("form-submit-anim");
-
     const round = Number(form.dataset.round);
 
-    form.addEventListener("animationend", () => {
-      hide(form);
+    const teamName = form.querySelector(".teamName").value.trim();
+    const teamId = form.querySelector(".teamId").value.trim();
+    const answer = form.querySelector("textarea").value.trim();
 
-      const codeBox = document.querySelector(
-        `.problem[data-problem="${currentProblemId}"]
-         .round-code-input-container[data-unlock="${round + 1}"]`
-      );
+    /* 🔥 SEND DATA TO N8N (PRODUCTION WEBHOOK) */
+    try {
+      await fetch(N8N_WEBHOOK_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          team_code: teamId,
+          team_name: teamName,
+          problem_id: currentProblemId,
+          level: round,
+          answer: answer
+        })
+      });
+    } catch (err) {
+      alert("Submission failed. Please try again.");
+      return;
+    }
 
-      if (codeBox) show(codeBox);
-    }, { once: true });
+    /* UI FLOW (UNCHANGED) */
+    form.classList.add("form-submit-anim");
+
+    form.addEventListener(
+      "animationend",
+      () => {
+        hide(form);
+
+        const codeBox = document.querySelector(
+          `.problem[data-problem="${currentProblemId}"]
+           .round-code-input-container[data-unlock="${round + 1}"]`
+        );
+
+        if (codeBox) show(codeBox);
+      },
+      { once: true }
+    );
   });
 });
 
-/*************************************************
- * ROUND CODE UNLOCK
- *************************************************/
+/*****************
+ * ROUND CODE UNLOCK (UNCHANGED)
+ *****************/
 document.querySelectorAll(".round-code-input-container").forEach(box => {
   const input = box.querySelector("input");
   const btn = box.querySelector("button");
@@ -153,32 +192,39 @@ document.querySelectorAll(".round-code-input-container").forEach(box => {
       .then(data => {
         if (!data.success) {
           error.textContent = "Incorrect code.";
-          btn.classList.remove("btn-loading");
           return;
         }
 
         error.textContent = "";
         box.classList.add("fade-slide-out");
 
-        box.addEventListener("animationend", () => {
-          hide(box);
+        box.addEventListener(
+          "animationend",
+          () => {
+            hide(box);
 
-          show(document.querySelector(
-            `.problem[data-problem="${currentProblemId}"]
-             section[data-section="${nextRound}"]`
-          ));
+            show(
+              document.querySelector(
+                `.problem[data-problem="${currentProblemId}"]
+                 section[data-section="${nextRound}"]`
+              )
+            );
 
-          const roundBlock = document.querySelector(
-            `.problem[data-problem="${currentProblemId}"]
-             section[data-round="${nextRound}"]`
-          );
+            const roundBlock = document.querySelector(
+              `.problem[data-problem="${currentProblemId}"]
+               section[data-round="${nextRound}"]`
+            );
 
-          show(roundBlock);
-          show(roundBlock.querySelector(`.round-form[data-round="${nextRound}"]`));
-        }, { once: true });
+            show(roundBlock);
+            const roundForm = roundBlock?.querySelector(
+              `.round-form[data-round="${nextRound}"]`
+            );
+            if (roundForm) show(roundForm);
+          },
+          { once: true }
+        );
       })
-      .catch(err => {
-        console.error(err);
+      .catch(() => {
         error.textContent = "Server error.";
       })
       .finally(() => {

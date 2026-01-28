@@ -227,3 +227,57 @@
 }
 
 
+/* ================= BASIC RESET ================= */
+body {
+  margin: 0;
+  overflow-x: hidden;
+}
+
+/* ================= MAIN WRAPPER ================= */
+.problem {
+  position: relative;
+}
+
+/* ================= STICKY SECTIONS ================= */
+.section_one,
+.section_two,
+.section_three,
+.section_four {
+  position: sticky;
+  top: 0;
+  min-height: 100vh;     /* full screen */
+  padding: 24px;
+  box-sizing: border-box;
+
+  background: #ffffff;
+}
+
+/* ================= STACKING ORDER ================= */
+/* Important so next section comes OVER previous */
+.section_one { z-index: 1; }
+.section_two   { z-index: 2; }
+.section_three { z-index: 3; }
+.section_four  { z-index: 4; }
+
+/* ================= OPTIONAL: visual separation ================= */
+.section_two   { background: #fafafa; }
+.section_four  { background: #f6f6f6; }
+
+/* ================= SMOOTH EXPERIENCE ================= */
+html {
+  scroll-behavior: smooth;
+}
+
+.section_one{
+    background-image: radial-gradient(white , red);
+}
+
+
+
+
+
+
+
+
+
+
