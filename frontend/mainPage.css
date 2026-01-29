@@ -277,10 +277,12 @@ html, body {
 
 @media (max-width : 600px){
     .enterBtn {
-        transform: translateX(-50%) scale(0.9);
+        position: absolute;
+        left: 50%;
+        transform: translate(-90%) scale(0.9);
     }
     .enterBtn.show{
-        transform: translateX(-50%) scale(0.5);
+        transform: translate(-50% , 30%) scale(0.5);
     }
     .enterBtn:hover{
         transform: translateX(-50%) scale(1.05);
