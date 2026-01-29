@@ -16,24 +16,52 @@ const currentProblemId = localStorage.getItem("selectedProblem") || "P1";
 let currentRound = 1;
 
 /**************************************
- * HARD CODED CODES
- **************************************/
-const CODES = {
-  P1: {
-    entry: "P1-OPEN",
-    rounds: {
-      2: "P1-R2",
-      3: "P1-R3",
-      4: "P1-R4"
-    }
-  }
-};
-
-/**************************************
  * HELPERS
  **************************************/
 const show = el => el && el.classList.remove("d-none");
 const hide = el => el && el.classList.add("d-none");
+
+/**************************************
+ * SUPABASE CODE VERIFICATION
+ **************************************/
+
+// ENTRY CODE (level = 0)
+/***************************************supabase Verification********************** ****/
+async function verifyEntryCode(problemId, code) {
+  const { data, error } = await supabaseClient
+    .from("problem_codes")
+    .select("id")
+    .eq("problem_id", problemId)
+    .eq("level", 0)
+    .eq("code", code)
+    .eq("active", true);
+
+  if (error) {
+    console.error("Entry code error:", error);
+    return false;
+  }
+
+  return data.length === 1;
+}
+
+// ROUND CODES (level = 2,3,4)
+async function verifyRoundCode(problemId, level, code) {
+  const { data, error } = await supabaseClient
+    .from("problem_codes")
+    .select("id")
+    .eq("problem_id", problemId)
+    .eq("level", level)
+    .eq("code", code)
+    .eq("active", true);
+
+  if (error) {
+    console.error("Round code error:", error);
+    return false;
+  }
+
+  return data.length === 1;
+}
+
 
 /**************************************
  * ENTRY CODE LOGIC
@@ -47,25 +75,57 @@ entryInput.addEventListener("keydown", e => {
   if (e.key === "Enter") entryBtn.click();
 });
 
-entryBtn.addEventListener("click", () => {
+entryBtn.addEventListener("click", async () => {
   const code = entryInput.value.trim();
+  entryError.textContent = "";
 
   if (!code) {
     entryError.textContent = "Enter problem code.";
     return;
   }
 
-  if (code !== CODES[currentProblemId].entry) {
+  entryBtn.disabled = true;
+  entryBtn.textContent = "Checking...";
+
+  const isValid = await verifyProblemEntry(currentProblemId, code);
+
+  entryBtn.disabled = false;
+  entryBtn.textContent = "Enter";
+
+  if (!isValid) {
     entryError.textContent = "Invalid problem code.";
-    return;
+    return; // ⛔ HARD STOP
   }
 
-  entryError.textContent = "";
+  // ✅ ONLY HERE UI IS UNLOCKED
   hide(cardContainer);
-
   document.querySelectorAll(".problem").forEach(hide);
   show(document.querySelector(`.problem[data-problem="${currentProblemId}"]`));
 });
+
+
+
+
+  /***************************************supabase Verification********************** ****/
+
+  async function verifyProblemEntry(problemId, code) {
+  const { data, error } = await supabaseClient
+    .from("problem_codes")
+    .select("id")
+    .eq("problem_id", problemId)
+    .eq("level", 0)
+    .eq("code", code)
+    .eq("active", true)
+    .maybeSingle();
+
+  if (error) {
+    console.error("Entry verification error:", error);
+    return false;
+  }
+
+  return !!data;
+}
+
 
 /**************************************
  * ROUND FORM SUBMISSION
@@ -80,31 +140,66 @@ document.querySelectorAll(".round-form").forEach(form => {
     }
   });
 
-  form.addEventListener("submit", e => {
-    e.preventDefault();
+  form.addEventListener("submit", async e => {
+  e.preventDefault();
 
-    let valid = true;
-    form.querySelectorAll("input, textarea").forEach(el => {
-      if (!el.value.trim()) {
-        el.classList.add("border-danger");
-        valid = false;
-      } else {
-        el.classList.remove("border-danger");
-      }
-    });
+  let valid = true;
+  form.querySelectorAll("input, textarea").forEach(el => {
+    if (!el.value.trim()) {
+      el.classList.add("border-danger");
+      valid = false;
+    } else {
+      el.classList.remove("border-danger");
+    }
+  });
 
-    if (!valid) return;
+  if (!valid) return;
 
-    submitBtn.disabled = true;
+  submitBtn.disabled = true;
+  submitBtn.textContent = "Submitting...";
+
+  const round = Number(form.dataset.round);
+  const teamId = form.querySelector(".teamId").value.trim();
+  const teamName = form.querySelector(".teamName").value.trim();
+  const teamLeader = form.querySelector(".teamLeader").value.trim();
+  const answer = form.querySelector("textarea").value.trim();
+
+  const { error } = await supabaseClient
+    .from("submissions")
+    .insert([{
+      team_id: teamId,
+      team_name: teamName,
+      team_leader: teamLeader,
+      problem_id: currentProblemId,
+      round,
+      answer
+    }]);
+
+  if (error) {
+    // 🚫 UNIQUE constraint hit
+    if (error.code === "23505") {
+      alert("You have already submitted this round.");
+    } else {
+      alert("Submission failed.");
+      console.error(error);
+    }
+
+    submitBtn.disabled = false;
+    submitBtn.textContent = "Submit!";
+    return;
+  }
+
+  // ✅ Success flow
+  setTimeout(() => {
     hide(form);
 
-    const round = Number(form.dataset.round);
     const nextCodeBox = document.querySelector(
       `.round-code-input-container[data-unlock="${round + 1}"]`
     );
-
     if (nextCodeBox) show(nextCodeBox);
-  });
+  }, 2000);
+});
+
 });
 
 /**************************************
@@ -128,8 +223,13 @@ document.querySelectorAll(".round-code-input-container").forEach(box => {
       return;
     }
 
-    if (code !== CODES[currentProblemId].rounds[nextRound]) {
+   /***************************************supabase Verification********************** ****/
+  btn.disabled = true;
+
+  verifyRoundCode(currentProblemId, nextRound, code).then(isValid => {
+    if (!isValid) {
       error.textContent = "Incorrect unlock code.";
+      btn.disabled = false;
       return;
     }
 
@@ -150,13 +250,14 @@ document.querySelectorAll(".round-code-input-container").forEach(box => {
     const nextRoundSection = document.querySelector(
       `section[data-round="${nextRound}"]`
     );
-    show(nextRoundSection);
+    if (nextRoundSection) show(nextRoundSection);;
 
-    /* 4️⃣ VERY IMPORTANT: show its form */
+    /* 4️⃣ Show its form */
     const nextForm = nextRoundSection.querySelector(".round-form");
     if (nextForm) show(nextForm);
 
     currentRound = nextRound;
+  });
   });
 });
 
