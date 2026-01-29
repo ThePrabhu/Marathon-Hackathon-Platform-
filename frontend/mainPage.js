@@ -40,6 +40,8 @@ document.querySelectorAll(".statement").forEach(card => {
 
     // store selected problem
     localStorage.setItem("selectedProblem", problemId);
+
+    window.location.href="attempt.html"
   });
 });
 

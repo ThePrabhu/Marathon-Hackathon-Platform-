@@ -49,93 +49,137 @@ html, body {
 }
 
 /* ===============================
-   PREMIUM PROBLEM LIST (FAST)
+   PREMIUM PROBLEM LIST
 ================================ */
+.statementContainer {
+    padding: 40px 20px;
+}
 
+.statement {
+    position: relative;
+    overflow: hidden;
+
+    background: linear-gradient(
+        135deg,
+        #7a0000,
+        #a00000
+    );
+
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+/* LIGHT SWEEP EFFECT */
+.statement::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(255,255,255,0.3),
+        transparent
+    );
+    transition: left 0.6s ease;
+}
+
+.statement:hover::before {
+    left: 100%;
+}
+
+/* SMOOTHER HOVER */
+.statement:hover {
+    transform: translateY(-4px);
+}
+
+/* ===============================
+   PROBLEM LIST – PREMIUM GRID
+================================ */
 .statementContainer {
     padding: 60px 24px;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 28px;
-
-    background: radial-gradient(
-        circle at top,
-        #7a0000,
-        #3b0000
-    );
+    background:
+      radial-gradient(circle at top, #8b0000, #4a0000);
 }
 
 /* ===============================
-   PROBLEM CARD (OPTIMIZED)
+   PROBLEM CARD
 ================================ */
-
 .statement {
     position: relative;
-    padding: 34px 28px;
-    min-height: 130px;
+    padding: 36px 28px;
+    min-height: 140px;
 
-    border-radius: 22px;
+    border-radius: 24px;
 
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255,255,255,0.14),
-            rgba(255,255,255,0.04)
-        );
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(14px);
 
-    border: 1px solid rgba(255,255,255,0.18);
-
+    border: 1px solid rgba(255,255,255,0.15);
     box-shadow:
-        inset 0 1px 0 rgba(255,255,255,0.12),
-        0 14px 32px rgba(0,0,0,0.35);
+      0 20px 40px rgba(0,0,0,0.35);
 
     cursor: pointer;
+    overflow: hidden;
 
     transition:
-        transform 0.22s ease,
-        box-shadow 0.22s ease;
-
-    will-change: transform;
+      transform 0.6s cubic-bezier(.19,1,.22,1),
+      box-shadow 0.6s ease;
 }
 
-/* ===============================
-   TEXT
-================================ */
+/* GLOW LAYER */
+.statement::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(
+        120deg,
+        transparent,
+        rgba(255,255,255,0.35),
+        transparent
+      );
+    transform: translateX(-120%);
+    transition: transform 0.7s ease;
+}
 
+/* TEXT */
 .statement a {
     color: #ffffff;
     font-size: 17px;
     font-weight: 700;
     font-family: 'Unbounded', sans-serif;
     text-decoration: none;
-
-    letter-spacing: 0.4px;
+    position: relative;
+    z-index: 1;
 }
 
-/* ===============================
-   HOVER (SMOOTH, NO LAG)
-================================ */
-
+/* HOVER EFFECT */
 .statement:hover {
-    transform: translateY(-6px);
-
+    transform: translateY(-12px) scale(1.02);
     box-shadow:
-        inset 0 1px 0 rgba(255,255,255,0.18),
-        0 26px 55px rgba(0,0,0,0.45);
+      0 40px 80px rgba(0,0,0,0.6);
+    color : white;
+    text-decoration: none;
 }
 
-/* ===============================
-   ACTIVE CLICK (INSTANT)
-================================ */
+.statement:hover::before {
+    transform: translateX(120%);
+}
 
+/* ACTIVE CLICK */
 .statement:active {
     transform: scale(0.97);
-
-    box-shadow:
-        inset 0 1px 0 rgba(255,255,255,0.12),
-        0 14px 30px rgba(0,0,0,0.35);
 }
 
+.problemTitle:hover{
+    text-decoration: none;
+    color : rgb(130, 123, 123);
+}
 
 
 /* ===============================
@@ -147,8 +191,9 @@ html, body {
     width: 100vw; 
     height: 100vh;
     overflow: hidden;
-    background: #800000;
+    background: #fcf9f9;
     z-index: 10;
+    
 }
 
 .introVideo {
@@ -156,8 +201,9 @@ html, body {
     inset: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;       /* THIS is the key */
+    object-fit: contain;       /* THIS is the key */
     object-position: center; /* Center crop */
+    
 }
 
 /* DARK CINEMATIC OVERLAY */
@@ -181,8 +227,8 @@ html, body {
 .enterBtn {
     position: absolute;
     bottom: -150px;
-    left: 50%;
-    transform: translateX(-50%) scale(0.9);
+    left: 65%;
+    transform: translateX(0) scale(0.9);
 
     padding: 20px 52px;
     font-size: 18px;
@@ -217,7 +263,7 @@ html, body {
 .enterBtn.show {
     bottom: 90px;
     opacity: 1;
-    transform: translateX(-50%) scale(1);
+    transform: translateX(0) scale(1);
 }
 
 /* HOVER = POWER */
@@ -225,7 +271,18 @@ html, body {
     background: linear-gradient(135deg,#7a0000,#a00000
     );
     color: white;
-    transform: translateX(-50%) scale(1.05);
+    transform: translateX(-10%) scale(1.05);
 }
 
 
+@media (max-width : 600px){
+    .enterBtn {
+        transform: translateX(-50%) scale(0.9);
+    }
+    .enterBtn.show{
+        transform: translateX(-50%) scale(0.5);
+    }
+    .enterBtn:hover{
+        transform: translateX(-50%) scale(1.05);
+    }
+}

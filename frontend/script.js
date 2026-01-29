@@ -1,103 +1,86 @@
-/*****************
- * API BASE (ONLY FOR CODE VERIFICATION – unchanged)
- *****************/
-const API_BASE =
-  location.hostname === "localhost"
-    ? "http://localhost:3000"
-    : "https://marathon-hackathon-platform-1.onrender.com";
+/**************
+ * SUPABASE CLIENT SETUP
+ **************/
+const SUPABASE_URL = "https://ypcuimvcgjbnzohhaqlg.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlwY3VpbXZjZ2pibnpvaGhhcWxnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njk2NzAwNTcsImV4cCI6MjA4NTI0NjA1N30.ELS9gx8qH6BRpY365Uh6HQyf9R5n22Aa-iJ-QcRQmKg";
 
-/*****************
- * N8N PRODUCTION WEBHOOK (IMPORTANT)
- *****************/
-const N8N_WEBHOOK_URL =
-  "https://ujwalc54.app.n8n.cloud/webhook/submit-answer";
+const supabaseClient = supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_ANON_KEY
+);
 
-/*****************
+/**************************************
  * GLOBAL STATE
- *****************/
-let currentProblemId = null;
+ **************************************/
+const currentProblemId = localStorage.getItem("selectedProblem") || "P1";
 let currentRound = 1;
 
-/*****************
- * LOAD SELECTED PROBLEM
- *****************/
-currentProblemId = localStorage.getItem("selectedProblem");
+/**************************************
+ * HARD CODED CODES
+ **************************************/
+const CODES = {
+  P1: {
+    entry: "P1-OPEN",
+    rounds: {
+      2: "P1-R2",
+      3: "P1-R3",
+      4: "P1-R4"
+    }
+  }
+};
 
-/*****************
+/**************************************
  * HELPERS
- *****************/
-const show = el => el.classList.remove("d-none");
-const hide = el => el.classList.add("d-none");
+ **************************************/
+const show = el => el && el.classList.remove("d-none");
+const hide = el => el && el.classList.add("d-none");
 
-/*****************
- * PROBLEM CODE ENTRY (UNCHANGED)
- *****************/
-const problemCodeInput = document.querySelector(".code-input-container input");
-const problemCodeBtn = document.querySelector(".problem-code-submit-btn");
-const problemCodeError = document.querySelector(".code-input-container .errorMsg");
+/**************************************
+ * ENTRY CODE LOGIC
+ **************************************/
+const entryInput = document.querySelector(".problem-code");
+const entryBtn = document.querySelector(".problem-code-submit-btn");
+const entryError = document.querySelector(".code-input-container .errorMsg");
 const cardContainer = document.querySelector(".card-container");
 
-problemCodeInput.addEventListener("keydown", e => {
-  if (e.key === "Enter") problemCodeBtn.click();
+entryInput.addEventListener("keydown", e => {
+  if (e.key === "Enter") entryBtn.click();
 });
 
-problemCodeBtn.addEventListener("click", () => {
-  const code = problemCodeInput.value.trim();
-
-  if (!currentProblemId) {
-    problemCodeError.textContent = "Select a problem first.";
-    return;
-  }
+entryBtn.addEventListener("click", () => {
+  const code = entryInput.value.trim();
 
   if (!code) {
-    problemCodeError.textContent = "Enter the problem code.";
+    entryError.textContent = "Enter problem code.";
     return;
   }
 
-  problemCodeBtn.classList.add("btn-loading");
+  if (code !== CODES[currentProblemId].entry) {
+    entryError.textContent = "Invalid problem code.";
+    return;
+  }
 
-  fetch(`${API_BASE}/verify-problem-code`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ problemId: currentProblemId, code })
-  })
-    .then(r => r.json())
-    .then(data => {
-      if (!data.success) {
-        problemCodeError.textContent = "Invalid code.";
-        return;
-      }
+  entryError.textContent = "";
+  hide(cardContainer);
 
-      problemCodeError.textContent = "";
-      cardContainer.classList.add("fade-slide-out");
-
-      cardContainer.addEventListener(
-        "animationend",
-        () => {
-          hide(cardContainer);
-          document.querySelectorAll(".problem").forEach(hide);
-          show(
-            document.querySelector(
-              `.problem[data-problem="${currentProblemId}"]`
-            )
-          );
-        },
-        { once: true }
-      );
-    })
-    .catch(() => {
-      problemCodeError.textContent = "Network error.";
-    })
-    .finally(() => {
-      problemCodeBtn.classList.remove("btn-loading");
-    });
+  document.querySelectorAll(".problem").forEach(hide);
+  show(document.querySelector(`.problem[data-problem="${currentProblemId}"]`));
 });
 
-/*****************
- * ROUND FORM SUBMISSION (N8N INTEGRATION ADDED)
- *****************/
+/**************************************
+ * ROUND FORM SUBMISSION
+ **************************************/
 document.querySelectorAll(".round-form").forEach(form => {
-  form.addEventListener("submit", async e => {
+  const submitBtn = form.querySelector("button");
+
+  form.addEventListener("keydown", e => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      submitBtn.click();
+    }
+  });
+
+  form.addEventListener("submit", e => {
     e.preventDefault();
 
     let valid = true;
@@ -112,53 +95,21 @@ document.querySelectorAll(".round-form").forEach(form => {
 
     if (!valid) return;
 
+    submitBtn.disabled = true;
+    hide(form);
+
     const round = Number(form.dataset.round);
-
-    const teamName = form.querySelector(".teamName").value.trim();
-    const teamId = form.querySelector(".teamId").value.trim();
-    const answer = form.querySelector("textarea").value.trim();
-
-    /* 🔥 SEND DATA TO N8N (PRODUCTION WEBHOOK) */
-    try {
-      await fetch(N8N_WEBHOOK_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          team_code: teamId,
-          team_name: teamName,
-          problem_id: currentProblemId,
-          level: round,
-          answer: answer
-        })
-      });
-    } catch (err) {
-      alert("Submission failed. Please try again.");
-      return;
-    }
-
-    /* UI FLOW (UNCHANGED) */
-    form.classList.add("form-submit-anim");
-
-    form.addEventListener(
-      "animationend",
-      () => {
-        hide(form);
-
-        const codeBox = document.querySelector(
-          `.problem[data-problem="${currentProblemId}"]
-           .round-code-input-container[data-unlock="${round + 1}"]`
-        );
-
-        if (codeBox) show(codeBox);
-      },
-      { once: true }
+    const nextCodeBox = document.querySelector(
+      `.round-code-input-container[data-unlock="${round + 1}"]`
     );
+
+    if (nextCodeBox) show(nextCodeBox);
   });
 });
 
-/*****************
- * ROUND CODE UNLOCK (UNCHANGED)
- *****************/
+/**************************************
+ * ROUND UNLOCK LOGIC 
+ **************************************/
 document.querySelectorAll(".round-code-input-container").forEach(box => {
   const input = box.querySelector("input");
   const btn = box.querySelector("button");
@@ -177,58 +128,81 @@ document.querySelectorAll(".round-code-input-container").forEach(box => {
       return;
     }
 
-    btn.classList.add("btn-loading");
+    if (code !== CODES[currentProblemId].rounds[nextRound]) {
+      error.textContent = "Incorrect unlock code.";
+      return;
+    }
 
-    fetch(`${API_BASE}/verify-round-code`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        problemId: currentProblemId,
-        round: nextRound,
-        code
-      })
-    })
-      .then(r => r.json())
-      .then(data => {
-        if (!data.success) {
-          error.textContent = "Incorrect code.";
-          return;
-        }
+    // ✅ Correct code
+    error.textContent = "";
+    hide(box);
 
-        error.textContent = "";
-        box.classList.add("fade-slide-out");
+    /* 1️⃣ Hide previous round */
+    hide(document.querySelector(`section[data-round="${nextRound - 1}"]`));
 
-        box.addEventListener(
-          "animationend",
-          () => {
-            hide(box);
+    /* 2️⃣ Show scenario */
+    const scenario = document.querySelector(
+      `section[data-section="${nextRound - 1}"]`
+    );
+    if (scenario) show(scenario);
 
-            show(
-              document.querySelector(
-                `.problem[data-problem="${currentProblemId}"]
-                 section[data-section="${nextRound}"]`
-              )
-            );
+    /* 3️⃣ Show next round section */
+    const nextRoundSection = document.querySelector(
+      `section[data-round="${nextRound}"]`
+    );
+    show(nextRoundSection);
 
-            const roundBlock = document.querySelector(
-              `.problem[data-problem="${currentProblemId}"]
-               section[data-round="${nextRound}"]`
-            );
+    /* 4️⃣ VERY IMPORTANT: show its form */
+    const nextForm = nextRoundSection.querySelector(".round-form");
+    if (nextForm) show(nextForm);
 
-            show(roundBlock);
-            const roundForm = roundBlock?.querySelector(
-              `.round-form[data-round="${nextRound}"]`
-            );
-            if (roundForm) show(roundForm);
-          },
-          { once: true }
-        );
-      })
-      .catch(() => {
-        error.textContent = "Server error.";
-      })
-      .finally(() => {
-        btn.classList.remove("btn-loading");
-      });
+    currentRound = nextRound;
+  });
+});
+
+/**************************************
+ * ROUND FORM SUBMISSION (WITH DELAY)
+ **************************************/
+document.querySelectorAll(".round-form").forEach(form => {
+  const submitBtn = form.querySelector("button");
+
+  form.addEventListener("keydown", e => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      submitBtn.click();
+    }
+  });
+
+  form.addEventListener("submit", e => {
+    e.preventDefault();
+
+    let valid = true;
+    form.querySelectorAll("input, textarea").forEach(el => {
+      if (!el.value.trim()) {
+        el.classList.add("border-danger");
+        valid = false;
+      } else {
+        el.classList.remove("border-danger");
+      }
+    });
+
+    if (!valid) return;
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Submitting...";
+
+    /* ⏳ 2.5 second delay */
+    setTimeout(() => {
+      hide(form);
+
+      const round = Number(form.dataset.round);
+      const nextCodeBox = document.querySelector(
+        `.round-code-input-container[data-unlock="${round + 1}"]`
+      );
+
+      if (nextCodeBox) show(nextCodeBox);
+
+      submitBtn.textContent = "Submitted";
+    }, 2500);
   });
 });
