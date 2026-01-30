@@ -1,364 +1,241 @@
-/**************
- * SUPABASE CLIENT SETUP
- **************/
-const SUPABASE_URL = "https://ypcuimvcgjbnzohhaqlg.supabase.co";
-const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlwY3VpbXZjZ2pibnpvaGhhcWxnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njk2NzAwNTcsImV4cCI6MjA4NTI0NjA1N30.ELS9gx8qH6BRpY365Uh6HQyf9R5n22Aa-iJ-QcRQmKg";
+console.log("✅ script.js loaded");
 
-const supabaseClient = supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_ANON_KEY
-);
+window.addEventListener("DOMContentLoaded", () => {
 
-/**************************************
- * GLOBAL STATE
- **************************************/
-const currentProblemId = localStorage.getItem("selectedProblem") || "P1";
-let currentRound = 1;
+  /* ================= SUPABASE ================= */
+  const SUPABASE_URL = "https://akxtmyyffjltnrgzbjna.supabase.co";
+  const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFreHRteXlmZmpsdG5yZ3piam5hIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njk3ODQzMDAsImV4cCI6MjA4NTM2MDMwMH0.0ZmNZ98me4tRw8UQu9nHbxaTZAYpV2BxdyHr_-sy0oE";
 
-/**************************************
- * HELPERS
- **************************************/
-const show = el => el && el.classList.remove("d-none");
-const hide = el => el && el.classList.add("d-none");
-
-
-/**************************************
- * PROGRESS PERSISTENCE (LOCAL)
- **************************************/
-function getProgress(problemId) {
-  return Number(localStorage.getItem(`progress_${problemId}`)) || 0;
-}
-
-function setProgress(problemId, round) {
-  localStorage.setItem(`progress_${problemId}`, round);
-}
-
-
-
-/**************************************
- * SUPABASE CODE VERIFICATION
- **************************************/
-
-// ENTRY CODE (level = 0)
-/***************************************supabase Verification********************** ****/
-async function verifyEntryCode(problemId, code) {
-  const { data, error } = await supabaseClient
-    .from("problem_codes")
-    .select("id")
-    .eq("problem_id", problemId)
-    .eq("level", 0)
-    .eq("code", code)
-    .eq("active", true);
-
-  if (error) {
-    console.error("Entry code error:", error);
-    return false;
-  }
-
-  return data.length === 1;
-}
-
-// ROUND CODES (level = 2,3,4)
-async function verifyRoundCode(problemId, level, code) {
-  const { data, error } = await supabaseClient
-    .from("problem_codes")
-    .select("id")
-    .eq("problem_id", problemId)
-    .eq("level", level)
-    .eq("code", code)
-    .eq("active", true);
-
-  if (error) {
-    console.error("Round code error:", error);
-    return false;
-  }
-
-  return data.length === 1;
-}
-
-
-/**************************************
- * ENTRY CODE LOGIC
- **************************************/
-const entryInput = document.querySelector(".problem-code");
-const entryBtn = document.querySelector(".problem-code-submit-btn");
-const entryError = document.querySelector(".code-input-container .errorMsg");
-const cardContainer = document.querySelector(".card-container");
-
-entryInput.addEventListener("keydown", e => {
-  if (e.key === "Enter") entryBtn.click();
-});
-
-entryBtn.addEventListener("click", async () => {
-  const code = entryInput.value.trim();
-  entryError.textContent = "";
-
-  if (!code) {
-    entryError.textContent = "Enter problem code.";
-    return;
-  }
-
-  entryBtn.disabled = true;
-  entryBtn.textContent = "Checking...";
-
-  const isValid = await verifyProblemEntry(currentProblemId, code);
-
-  entryBtn.disabled = false;
-  entryBtn.textContent = "Enter";
-
-  if (!isValid) {
-    entryError.textContent = "Invalid problem code.";
-    return; // ⛔ HARD STOP
-  }
-
-  // ✅ ONLY HERE UI IS UNLOCKED
-  hide(cardContainer);
-  document.querySelectorAll(".problem").forEach(hide);
-  show(document.querySelector(`.problem[data-problem="${currentProblemId}"]`));
-});
-
-
-
-
-  /***************************************supabase Verification********************** ****/
-
-  async function verifyProblemEntry(problemId, code) {
-  const { data, error } = await supabaseClient
-    .from("problem_codes")
-    .select("id")
-    .eq("problem_id", problemId)
-    .eq("level", 0)
-    .eq("code", code)
-    .eq("active", true)
-    .maybeSingle();
-
-  if (error) {
-    console.error("Entry verification error:", error);
-    return false;
-  }
-
-  return !!data;
-}
-
-
-/**************************************
- * ROUND FORM SUBMISSION
- **************************************/
-document.querySelectorAll(".round-form").forEach(form => {
-  const submitBtn = form.querySelector("button");
-
-  form.addEventListener("keydown", e => {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      submitBtn.click();
-    }
-  });
-
-  form.addEventListener("submit", async e => {
-  e.preventDefault();
-
-  let valid = true;
-  form.querySelectorAll("input, textarea").forEach(el => {
-    if (!el.value.trim()) {
-      el.classList.add("border-danger");
-      valid = false;
-    } else {
-      el.classList.remove("border-danger");
-    }
-  });
-
-  if (!valid) return;
-
-  submitBtn.disabled = true;
-  submitBtn.textContent = "Submitting...";
-
-  const round = Number(form.dataset.round);
-  const teamId = form.querySelector(".teamId").value.trim();
-  const teamName = form.querySelector(".teamName").value.trim();
-  const teamLeader = form.querySelector(".teamLeader").value.trim();
-  const answer = form.querySelector("textarea").value.trim();
-
-  const { error } = await supabaseClient
-    .from("submissions")
-    .insert([{
-      team_id: teamId,
-      team_name: teamName,
-      team_leader: teamLeader,
-      problem_id: currentProblemId,
-      round,
-      answer
-    }]);
-
-  if (error) {
-    // 🚫 UNIQUE constraint hit
-    if (error.code === "23505") {
-      alert("You have already submitted this round.");
-    } else {
-      alert("Submission failed.");
-      console.error(error);
-    }
-
-    submitBtn.disabled = false;
-    submitBtn.textContent = "Submit!";
-    return;
-  }
-
-  // ✅ Success flow
-  setTimeout(() => {
-    hide(form);
-
-    const nextCodeBox = document.querySelector(
-      `.round-code-input-container[data-unlock="${round + 1}"]`
-    );
-    if (nextCodeBox) show(nextCodeBox);
-  }, 2000);
-});
-
-});
-
-/**************************************
- * ROUND UNLOCK LOGIC 
- **************************************/
-document.querySelectorAll(".round-code-input-container").forEach(box => {
-  const input = box.querySelector("input");
-  const btn = box.querySelector("button");
-  const error = box.querySelector(".errorMsg");
-
-  input.addEventListener("keydown", e => {
-    if (e.key === "Enter") btn.click();
-  });
-
-  btn.addEventListener("click", () => {
-    const code = input.value.trim();
-    const nextRound = Number(box.dataset.unlock);
-
-    if (!code) {
-      error.textContent = "Enter unlock code.";
-      return;
-    }
-
-   /***************************************supabase Verification********************** ****/
-  btn.disabled = true;
-
-  verifyRoundCode(currentProblemId, nextRound, code).then(isValid => {
-    if (!isValid) {
-      error.textContent = "Incorrect unlock code.";
-      btn.disabled = false;
-      return;
-    }
-
-    // ✅ Correct code
-    error.textContent = "";
-    hide(box);
-
-    /* 1️⃣ Hide previous round */
-    hide(document.querySelector(`section[data-round="${nextRound - 1}"]`));
-
-    /* 2️⃣ Show scenario */
-    const scenario = document.querySelector(
-      `section[data-section="${nextRound - 1}"]`
-    );
-    if (scenario) show(scenario);
-
-    /* 3️⃣ Show next round section */
-    const nextRoundSection = document.querySelector(
-      `section[data-round="${nextRound}"]`
-    );
-    if (nextRoundSection) show(nextRoundSection);;
-
-    /* 4️⃣ Show its form */
-    const nextForm = nextRoundSection.querySelector(".round-form");
-    if (nextForm) show(nextForm);
-
-    currentRound = nextRound;
-    setProgress(currentProblemId, nextRound);
-  });
-  });
-});
-
-/**************************************
- * ROUND FORM SUBMISSION (WITH DELAY)
- **************************************/
-document.querySelectorAll(".round-form").forEach(form => {
-  const submitBtn = form.querySelector("button");
-
-  form.addEventListener("keydown", e => {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      submitBtn.click();
-    }
-  });
-
-  form.addEventListener("submit", e => {
-    e.preventDefault();
-
-    let valid = true;
-    form.querySelectorAll("input, textarea").forEach(el => {
-      if (!el.value.trim()) {
-        el.classList.add("border-danger");
-        valid = false;
-      } else {
-        el.classList.remove("border-danger");
-      }
-    });
-
-    if (!valid) return;
-
-    submitBtn.disabled = true;
-    submitBtn.textContent = "Submitting...";
-
-    /* ⏳ 2.5 second delay */
-    setTimeout(() => {
-      hide(form);
-
-      const round = Number(form.dataset.round);
-      const nextCodeBox = document.querySelector(
-        `.round-code-input-container[data-unlock="${round + 1}"]`
-      );
-
-      if (nextCodeBox) show(nextCodeBox);
-
-      submitBtn.textContent = "Submitted";
-    }, 2500);
-  });
-});
-
-/**************************************
- * RESTORE STATE ON PAGE LOAD
- **************************************/
-window.addEventListener("load", () => {
-  const progress = getProgress(currentProblemId);
-  if (!progress) return;
-
-  // Hide entry gate
-  hide(document.querySelector(".card-container"));
-
-  // Show correct problem
-  const problem = document.querySelector(
-    `.problem[data-problem="${currentProblemId}"]`
+  const supabase = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_ANON_KEY
   );
-  if (!problem) return;
 
-  show(problem);
+  /* ================= HELPERS ================= */
+  const qs = s => document.querySelector(s);
+  const qsa = s => [...document.querySelectorAll(s)];
+  const show = el => el && el.classList.remove("d-none");
+  const hide = el => el && el.classList.add("d-none");
 
-  // Reset everything first
-  problem.querySelectorAll("[data-round]").forEach(hide);
-  problem.querySelectorAll("[data-section]").forEach(hide);
-  problem.querySelectorAll(".round-code-input-container").forEach(hide);
+  const sleep = ms => new Promise(res => setTimeout(res, ms));
 
-  // Replay unlocked rounds
-  for (let r = 1; r <= progress; r++) {
-    const scenario = problem.querySelector(`[data-section="${r}"]`);
-    if (scenario) show(scenario);
+  /* ================= DOM ================= */
+  const cardContainer = qs(".card-container");
+  const entryInput = qs(".problem-code");
+  const entryBtn = qs(".problem-code-submit-btn");
+  const entryError = qs(".errorMsg");
 
-    const roundBlock = problem.querySelector(`[data-round="${r}"]`);
-    if (roundBlock) show(roundBlock);
+  const problems = qsa(".problem");
+
+  /* ================= STATE ================= */
+  const selectedProblem = localStorage.getItem("selectedProblem");
+  const progressKey = pid => `progress_${pid}`;
+
+  const getProgress = pid =>
+    Number(localStorage.getItem(progressKey(pid))) || 0;
+
+  const setProgress = (pid, round) =>
+    localStorage.setItem(progressKey(pid), round);
+
+  const bound = new Set();
+
+  /* ================= RESET ================= */
+  function resetProblem(problemEl) {
+    problemEl.querySelectorAll("[data-round]").forEach(hide);
+    problemEl.querySelectorAll("[data-section]").forEach(hide);
+    problemEl.querySelectorAll(".round-code-input-container").forEach(hide);
   }
 
-  // Show next form if exists
-  const nextRound = progress + 1;
-  const nextForm = problem.querySelector(
-    `.round-form[data-round="${nextRound}"]`
+function replayProblem(problemEl, progress) {
+
+  // FIRST TIME ENTRY → SHOW ROUND 1
+  if (progress === 0) {
+    show(problemEl.querySelector('[data-round="1"]'));
+    show(problemEl.querySelector('.round-form[data-round="1"]'));
+    return;
+  }
+
+  // REPLAY COMPLETED ROUNDS
+  for (let i = 1; i <= progress; i++) {
+    show(problemEl.querySelector(`[data-section="${i}"]`));
+    show(problemEl.querySelector(`[data-round="${i}"]`));
+  }
+
+  // SHOW NEXT ROUND FORM
+  const nextForm = problemEl.querySelector(
+    `.round-form[data-round="${progress + 1}"]`
   );
   if (nextForm) show(nextForm);
+}
+
+
+  /* ================= DB ================= */
+  async function verifyEntryCode(code) {
+    const { data } = await supabase
+      .from("problem_codes")
+      .select("problem_id")
+      .eq("level", 0)
+      .eq("code", code)
+      .eq("active", true)
+      .maybeSingle();
+
+    return data?.problem_id || null;
+  }
+
+  async function verifyUnlockCode(pid, level, code) {
+    const { data } = await supabase
+      .from("problem_codes")
+      .select("id")
+      .eq("problem_id", pid)
+      .eq("level", level)
+      .eq("code", code)
+      .eq("active", true)
+      .maybeSingle();
+
+    return !!data;
+  }
+
+  async function alreadySubmitted(teamId, pid, round) {
+    const { data } = await supabase
+      .from("submissions")
+      .select("id")
+      .eq("team_id", teamId)
+      .eq("problem_id", pid)
+      .eq("round", round)
+      .maybeSingle();
+
+    return !!data;
+  }
+
+  async function submitAnswer(payload) {
+    const { error } = await supabase
+      .from("submissions")
+      .insert([payload]);
+
+    return !error;
+  }
+
+  /* ================= ENTRY ================= */
+  entryBtn.addEventListener("click", async () => {
+    entryError.textContent = "";
+    const code = entryInput.value.trim();
+
+    if (!code) {
+      entryError.textContent = "Enter problem code";
+      return;
+    }
+
+    entryBtn.disabled = true;
+    await sleep(1500);
+
+    const pid = await verifyEntryCode(code);
+    entryBtn.disabled = false;
+
+    if (!pid || String(pid) !== selectedProblem) {
+      entryError.textContent = "Invalid problem code";
+      return;
+    }
+
+    hide(cardContainer);
+    problems.forEach(hide);
+
+    const problemEl = qs(`.problem[data-problem="${pid}"]`);
+    if (!problemEl) {
+      entryError.textContent = "Problem not found";
+      return;
+    }
+
+    show(problemEl);
+    resetProblem(problemEl);
+    replayProblem(problemEl, getProgress(pid));
+    bindProblem(problemEl);
+  });
+
+  /* ================= BIND ================= */
+  function bindProblem(problemEl) {
+    const pid = problemEl.dataset.problem;
+    if (bound.has(pid)) return;
+    bound.add(pid);
+
+    /* ===== FORMS ===== */
+    problemEl.querySelectorAll(".round-form").forEach(form => {
+      form.addEventListener("submit", async e => {
+        e.preventDefault();
+
+        const round = Number(form.dataset.round);
+        const teamId = form.querySelector(".teamId").value.trim();
+        const teamName = form.querySelector(".teamName").value.trim();
+        const leader = form.querySelector(".teamLeader").value.trim();
+        const answer = form.querySelector("textarea").value.trim();
+
+        if (!teamId || !teamName || !leader || !answer) return;
+
+        if (await alreadySubmitted(teamId, pid, round)) {
+          alert("Already submitted");
+          return;
+        }
+
+        form.querySelector("button").disabled = true;
+        await sleep(2000);
+
+        const ok = await submitAnswer({
+          team_id: teamId,
+          team_name: teamName,
+          team_leader: leader,
+          problem_id: pid,
+          round,
+          answer
+        });
+
+        if (!ok) {
+          alert("Submission failed");
+          return;
+        }
+
+        hide(form);
+        show(
+          problemEl.querySelector(
+            `.round-code-input-container[data-unlock="${round + 1}"]`
+          )
+        );
+      });
+    });
+
+    /* ===== UNLOCK CODES ===== */
+    problemEl.querySelectorAll(".round-code-input-container").forEach(box => {
+      const btn = box.querySelector("button");
+      const input = box.querySelector("input");
+      const error = box.querySelector(".errorMsg");
+
+      btn.addEventListener("click", async () => {
+        error.textContent = "";
+        const code = input.value.trim();
+        const nextRound = Number(box.dataset.unlock);
+
+        if (!code) {
+          error.textContent = "Enter unlock code";
+          return;
+        }
+
+        btn.disabled = true;
+        await sleep(1500);
+
+        const ok = await verifyUnlockCode(pid, nextRound, code);
+        btn.disabled = false;
+
+        if (!ok) {
+          error.textContent = "Wrong code";
+          return;
+        }
+
+        hide(box);
+        show(problemEl.querySelector(`[data-section="${nextRound - 1}"]`));
+        show(problemEl.querySelector(`[data-round="${nextRound}"]`));
+        setProgress(pid, nextRound);
+      });
+    });
+  }
+
 });
+
+

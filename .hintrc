@@ -24,7 +24,8 @@
           "backdrop-filter"
         ]
       }
-    ]
+    ],
+    "button-type": "off"
   },
   "browserslist": [
     "defaults",

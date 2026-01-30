@@ -1,4 +1,5 @@
-// SPLASH LOGIC
+document.addEventListener("DOMContentLoaded", () => {
+  // SPLASH LOGIC
 const splash = document.querySelector(".Imgcontainer");
 const list = document.querySelector(".statementContainer");
 const videoSection = document.querySelector(".videoSection");
@@ -45,7 +46,4 @@ document.querySelectorAll(".statement").forEach(card => {
   });
 });
 
-
-
-
-
+});

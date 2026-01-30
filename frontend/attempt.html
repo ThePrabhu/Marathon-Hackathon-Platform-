@@ -6,15 +6,15 @@
     <title>Marathon Hackathon</title>
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+    <!-- Bootstrap (unchanged) -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
+
 <body>
     <section class="attempt-area">
 
-        <!-- problem statement entry code -->
+        <!-- ================= ENTRY CARD ================= -->
         <div class="card-container">
             <div class="code-input-container">
                 <h1 class="code-input-heading">
@@ -26,238 +26,774 @@
             </div>
         </div>
 
-        <!-- ----------------------------------problem statement 1 -------------------------------->
-         <section class="problem d-none" data-problem="P1">
-            <!-- heading -->
-             <section class="section_one">
+        <!-- ================= PROBLEM TEMPLATE ================= -->
+        <!-- COPY THIS ENTIRE <section class="problem"> FOR ALL 20 PROBLEMS -->
+        <!-- CHANGE ONLY data-problem VALUE -->
+
+        <section class="problem d-none" data-problem="1">
+
+            <!-- ================= SECTION ONE ================= -->
+            <section class="section_one">
                 <h2 class="problemstatementTitle text-center">
                     1 — AI Infrastructure Monetization and Return Alignment Experience
-                </h2><hr>
-                <!-- story -->
+                </h2>
+                <hr>
+
                 <h3 class="problemstatementSubheading">
                     Story / Problem Narrative
                 </h3>
-                <p class="scenario">
-                    A technology company makes aggressive, front-loaded investments in AI infrastructure, including large-scale data centers, specialized accelerators, and long-duration model training pipelines. These investments immediately lock in high fixed and operational costs. However, enterprise customers approach AI adoption cautiously—running pilots, seeking internal approvals, testing limited use cases, and postponing long-term commitments. <br> <br>
-                    As a result, leadership observes a widening imbalance: costs materialize with certainty and speed, while revenue materializes slowly, irregularly, and with significant uncertainty. Although technical capability and deployment scale continue to improve, the organization struggles to determine whether this progress is translating into real, defensible economic value. The core challenge is no longer technological feasibility, but timing, measurement, and financial alignment.
-                </p><hr>
 
-                <!-- gunshot explanation -->
-        
+                <p class="scenario">
+                    A technology company makes aggressive, front-loaded investments in AI infrastructure, including large-scale data centers, specialized accelerators, and long-duration model training pipelines. These investments immediately lock in high fixed and operational costs. However, enterprise customers approach AI adoption cautiously—running pilots, seeking internal approvals, testing limited use cases, and postponing long-term commitments. <br><br>
+                    As a result, leadership observes a widening imbalance: costs materialize with certainty and speed, while revenue materializes slowly, irregularly, and with significant uncertainty. Although technical capability and deployment scale continue to improve, the organization struggles to determine whether this progress is translating into real, defensible economic value. The core challenge is no longer technological feasibility, but timing, measurement, and financial alignment.
+                </p>
+                <hr>
             </section>
 
-
-            <!-- -------scenarios------- -->
-
+            <!-- ================= SECTION TWO (SCENARIOS) ================= -->
             <section class="section_two">
                 <h3 class="problemstatementSubheading text-center scenarioHeading">
                     App Structure Through Scenarios
                 </h3>
-                <!-- scenario-1 -->
+
                 <section data-section="1" class="d-none">
                     <h3 class="problemstatementSubheading">
                         Scenario 1 - Investment Visibility Problem
                     </h3>
                     <p class="scenario">
-                            AI infrastructure spending increases rapidly due to capacity planning and long-term commitments.Revenue from enterprise customers grows slowly, unevenly, and varies significantly across accounts.In the short term, the relationship between infrastructure usage, customer value, and financial return is difficult to observe clearly. <br><br>
-                        <h4 class="problemstatementSubheading think">
-                            💡Think
-                        </h4>
+                        AI infrastructure spending increases rapidly due to capacity planning and long-term commitments. Revenue from enterprise customers grows slowly, unevenly, and varies significantly across accounts. <br><br>
+                        <h4 class="problemstatementSubheading think">💡Think</h4>
                         How should a system evaluate whether current AI investment levels are economically justified when usage signals are partial, fragmented, and do not directly translate into immediate revenue?
-                    </p><hr>
+                    </p>
+                    <hr>
                 </section>
 
-                <!-- scenario-2 -->
                 <section data-section="2" class="d-none">
                     <h3 class="problemstatementSubheading">
                         Scenario 2 – Time and Expectation Issue
                     </h3>
                     <p class="scenario">
-                        Enterprise customers require extended periods to test, validate, approve, and operationalize AI capabilities.nfrastructure is deployed upfront, but revenue realization occurs much later and is subject to organizational delays on the customer side. <br> <br>
-                        <h4 class="problemstatementSubheading think">
-                            💡Think
-                        </h4>
-                        How should a system assess realistic timelines for AI revenue realization without relying on optimistic adoption assumptions or penalizing long enterprise decision cycles?
-                    </p><hr>
+                        Enterprise customers require extended periods to test, validate, approve, and operationalize AI capabilities. Infrastructure is deployed upfront, but revenue realization occurs much later. <br><br>
+                        <h4 class="problemstatementSubheading think">💡Think</h4>
+                        How should a system assess realistic timelines for AI revenue realization without relying on optimistic adoption assumptions?
+                    </p>
+                    <hr>
                 </section>
 
-                <!-- scenario-3 -->
                 <section data-section="3" class="d-none">
                     <h3 class="problemstatementSubheading">
-                   Scenario 3 – User Behavior and Edge Cases
+                        Scenario 3 – User Behavior and Edge Cases
                     </h3>
                     <p class="scenario">
                         Some customers engage with AI services only at an experimental level and never transition to scaled usage.
-                        Others request extensive customization and support but avoid long-term contractual commitments.
-                        <h4 class="problemstatementSubheading think">
-                            💡Think
-                        </h4>
-                        How should a system interpret early usage behavior to distinguish between genuine long-term potential and non-scalable experimentation without systematically overestimating future revenue?
-                    </p><hr>
+                        <h4 class="problemstatementSubheading think">💡Think</h4>
+                        How should a system distinguish genuine long-term potential from non-scalable experimentation?
+                    </p>
+                    <hr>
                 </section>
-                <!-- scenario-4 -->
+
                 <section data-section="4" class="d-none">
                     <h3 class="problemstatementSubheading">
-                    Scenario 4 – Scale and Growth
+                        Scenario 4 – Scale and Growth
                     </h3>
                     <p class="scenario">
-                        As AI infrastructure expands globally, fixed costs increase sharply and become less reversible. At this scale, even small forecasting inaccuracies can amplify into substantial financial exposure.
-                    <h4 class="problemstatementSubheading think">
-                            💡Think
-                        </h4>
-                        How should a system adapt investment pacing and monetization strategies as infrastructure scale increases and forecasting errors carry significantly higher risk?
-                    </p><hr>
+                        As AI infrastructure expands globally, fixed costs increase sharply and become less reversible.
+                        <h4 class="problemstatementSubheading think">💡Think</h4>
+                        How should a system adapt investment pacing as forecasting errors grow more expensive?
+                    </p>
+                    <hr>
                 </section>
-            <section>
+            </section>
 
+            <!-- ================= SECTION THREE ================= -->
             <section class="section_three">
                 <h3 class="problemstatementSubheading">
                     Gun-shot Problem Statement:
                 </h3>
                 <p class="scenario">
-                    Solve the problem of aligning large-scale AI infrastructure investment with realistic and sustainable enterprise revenue by managing cost pressure, adoption uncertainty, delayed monetization, and long-term value realization without assuming linear growth or immediate payoff.
-                </p><hr>
+                    Solve the problem of aligning large-scale AI infrastructure investment with realistic and sustainable enterprise revenue.
+                </p>
+                <hr>
             </section>
 
+            <!-- ================= SECTION FOUR (ROUNDS) ================= -->
+            <section class="section_four">
 
-            <!-------------- Rounds-Form-CodeEnter Sections----------- -->
-
-            <!-- Round-1 Question -->
-             <section class="section_four">
-
+                <!-- ================= ROUND 1 ================= -->
                 <section class="round1" data-round="1">
-
                     <h3 class="problemstatementSubheading round1">
                         ROUND 1 – Aptitude and Logical Reasoning
                     </h3>
+
                     <p class="scenario">
-                        During a financial quarterAI infrastructure costs are incurred for 1,000 usage unitsEach enterprise contract monetizes 25 usage units per quarter20 percent of contracts do not renew after initial use.<br>
-                    <span class="question">
-                            Question
-                    </span><br>
-                    What is the minimum number of active enterprise contracts required to fully cover infrastructure usage within the quarter, accounting for non-renewing contracts?
-                    </p><hr>
-            
-                    <!-- Round Form -->
-                    <form class="round-form" data-round="1" id="round1Form">
+                        During a financial quarter AI infrastructure costs are incurred for 1,000 usage units.
+                        <span class="question">Question</span><br>
+                        What is the minimum number of active enterprise contracts required?
+                    </p>
+                    <hr>
+
+                    <form class="round-form" data-round="1">
                         <h3 class="formHeading">Submit Form for Round-1</h3>
-                        <input type="text" name="teamName" class="teamName" placeholder="Team Name">
-                        <input type="text" name="teamLeader" class="teamLeader" placeholder="Team Leader">
-                        <input type="number" name="teamId" class="teamId" placeholder="Team Id/Number">
-                        <textarea name="answer" class="round-one-input" placeholder="Enter Your Answer"></textarea>
-                        <button type="submit" class="round-one-submitBtn btn btn-success">Submit!</button>
+                        <input class="teamName" placeholder="Team Name">
+                        <input class="teamLeader" placeholder="Team Leader">
+                        <input class="teamId" placeholder="Team Id/Number">
+                        <textarea placeholder="Enter Your Answer"></textarea>
+                        <button class="btn btn-success">Submit!</button>
                     </form>
 
-                    <!-- Round 2 Unlock Code -->
                     <div class="round-code-input-container d-none" data-unlock="2">
                         <div class="codeCardContainer">
                             <h1 class="text">Enter Round-2 Code!</h1>
-                            <input type="text" class="round-Two-Code">
-                            <button class="btn btn-secondary" class="unlock-btn">Enter</button>
+                            <input type="text">
+                            <button class="btn btn-secondary">Enter</button>
                             <p class="errorMsg text-danger"></p>
                         </div>
                     </div>
                 </section>
 
-                <!-- Round 2 Question -->
+                <!-- ================= ROUND 2 ================= -->
                 <section class="round2 d-none" data-round="2">
-
                     <h3 class="problemstatementSubheading round2">
                         ROUND 2 – Aptitude and Analytical Reasoning
                     </h3>
-                    <p class="scenario">
-                        Average enterprise adoption delay is 6 monthsEarly pilot programs generate only 40 percent of expected revenuePilots represent 50 percent of new customers
-                    <span class="question">
-                            Question
-                    </span><br>
-                    Average enterprise adoption delay is 6 monthsEarly pilot programs generate only 40 percent of expected revenuePilots represent 50 percent of new customers
-                    </p><hr>
-            
-                    <!-- Round Form -->
-                    <form class="round-form d-none" data-round="2" id="round2Form">
+
+                    <form class="round-form d-none" data-round="2">
                         <h3 class="formHeading">Submit Form for Round-2</h3>
-                        <input type="text" name="teamName" class="teamName" placeholder="Team Name">
-                        <input type="text" name="teamLeader" class="teamLeader" placeholder="Team Leader">
-                        <input type="number" name="teamId" class="teamId" placeholder="Team Id/Number">
-                        <textarea name="answer" class="round-two-input" placeholder="Enter Your Answer"></textarea>
-                        <button type="submit" class="round-two-submitBtn btn btn-success">Submit!</button>
+                        <input class="teamName">
+                        <input class="teamLeader">
+                        <input class="teamId">
+                        <textarea></textarea>
+                        <button class="btn btn-success">Submit!</button>
                     </form>
 
-                    <!-- Round 3 Unlock Code -->
                     <div class="round-code-input-container d-none" data-unlock="3">
                         <div class="codeCardContainer">
                             <h1 class="text">Enter Round-3 Code!</h1>
-                            <input type="text" class="round-Three-Code">
-                            <button class="btn btn-secondary" class="unlock-btn">Enter</button>
+                            <input type="text">
+                            <button class="btn btn-secondary">Enter</button>
                             <p class="errorMsg text-danger"></p>
                         </div>
                     </div>
                 </section>
 
-                <!-- Round-3 Question -->
+                <!-- ================= ROUND 3 ================= -->
                 <section class="round3 d-none" data-round="3">
-
                     <h3 class="problemstatementSubheading round3">
                         ROUND 3 – System Thinking (No Coding)
                     </h3>
-                    <p class="scenario">
-                        An enterprise customer repeatedly uses AI services at low volume over an extended period but avoids committing to paid expansion or long-term contracts.
 
-                    <span class="question">
-                            Question
-                    </span><br>
-                    How should the system detect and respond to this usage pattern in a way that balances cost control with the possibility of future genuine adoption, without discouraging high-potential customers prematurely?
-                    </p><hr>
-            
-                    <!-- Round Form -->
-                    <form class="round-form d-none" data-round="3" id="round3Form">
+                    <form class="round-form d-none" data-round="3">
                         <h3 class="formHeading">Submit Form for Round-3</h3>
-                        <input type="text" name="teamName" class="teamName" placeholder="Team Name">
-                        <input type="text" name="teamLeader" class="teamLeader" placeholder="Team Leader">
-                        <input type="number" name="teamId" class="teamId" placeholder="Team Id/Number">
-                        <textarea name="answer" class="round-three-input" placeholder="Enter Your Answer"></textarea>
-                        <button type="submit" class="round-three-submitBtn btn btn-success">Submit!</button>
+                        <input class="teamName">
+                        <input class="teamLeader">
+                        <input class="teamId">
+                        <textarea></textarea>
+                        <button class="btn btn-success">Submit!</button>
                     </form>
 
-                    <!-- Round 4 Unlock Code -->
                     <div class="round-code-input-container d-none" data-unlock="4">
                         <div class="codeCardContainer">
                             <h1 class="text">Enter Round-4 Code!</h1>
-                            <input type="text" class="round-four-Code">
-                            <button class="btn btn-secondary" class="unlock-btn">Enter</button>
+                            <input type="text">
+                            <button class="btn btn-secondary">Enter</button>
                             <p class="errorMsg text-danger"></p>
                         </div>
                     </div>
                 </section>
 
-                <!-- Round-4 Question -->
-                <section class="round-form d-none" data-round="4">
-
+                <!-- ================= ROUND 4 ================= -->
+                <section class="round4 d-none" data-round="4">
                     <h3 class="problemstatementSubheading round4">
                         ROUND 4 – End-to-End Problem Thinking
                     </h3>
-                    <p class="scenario">
-                        AI monetization depends on infrastructure investment, customer onboarding, usage growth, pricing, and revenue realization over time, all under conditions of uncertainty.<br>
-                    <span class="question">
-                            Question
-                    </span><br>
-                    How should the system ensure long-term financial sustainability while continuing to invest in AI capabilities, given delayed adoption, uneven customer behavior, and compounding infrastructure costs?
-                    Clearly explain which phases are included in the total time and why arrival time and travel time must be tracked separately.
-                    </p><hr>
-            
-                    <!-- Round Form -->
+
                     <form class="round-form d-none" data-round="4">
                         <h3 class="formHeading">Submit Form for Round-4</h3>
-                        <input type="text" name="teamName" class="teamName" placeholder="Team Name">
-                        <input type="text" name="teamLeader" class="teamLeader" placeholder="Team Leader">
-                        <input type="number" name="teamId" class="teamId" placeholder="Team Id/Number">
-                        <textarea name="answer" class="round-four-input" placeholder="Enter Your Answer"></textarea>
-                        <button type="submit" class="round-four-submitBtn btn btn-success">Submit!</button>
+                        <input class="teamName">
+                        <input class="teamLeader">
+                        <input class="teamId">
+                        <textarea></textarea>
+                        <button class="btn btn-success">Submit!</button>
                     </form>
                 </section>
+
             </section>
-            
         </section>
+
+
+    <!-- =================================================================Problem Statement - 2 ==================================================== -->
+        <section class="problem d-none" data-problem="2">
+
+            <!-- ================= SECTION ONE ================= -->
+            <section class="section_one">
+                <h2 class="problemstatementTitle text-center">
+                    2 — AI Infrastructure Monetization and Return Alignment Experience
+                </h2>
+                <hr>
+
+                <h3 class="problemstatementSubheading">
+                    Story / Problem Narrative
+                </h3>
+
+                <p class="scenario">
+                    A technology company makes aggressive, front-loaded investments in AI infrastructure, including large-scale data centers, specialized accelerators, and long-duration model training pipelines. These investments immediately lock in high fixed and operational costs. However, enterprise customers approach AI adoption cautiously—running pilots, seeking internal approvals, testing limited use cases, and postponing long-term commitments. <br><br>
+                    As a result, leadership observes a widening imbalance: costs materialize with certainty and speed, while revenue materializes slowly, irregularly, and with significant uncertainty. Although technical capability and deployment scale continue to improve, the organization struggles to determine whether this progress is translating into real, defensible economic value. The core challenge is no longer technological feasibility, but timing, measurement, and financial alignment.
+                </p>
+                <hr>
+            </section>
+
+            <!-- ================= SECTION TWO (SCENARIOS) ================= -->
+            <section class="section_two">
+                <h3 class="problemstatementSubheading text-center scenarioHeading">
+                    App Structure Through Scenarios
+                </h3>
+
+                <section data-section="1" class="d-none">
+                    <h3 class="problemstatementSubheading">
+                        Scenario 1 - Investment Visibility Problem
+                    </h3>
+                    <p class="scenario">
+                        AI infrastructure spending increases rapidly due to capacity planning and long-term commitments. Revenue from enterprise customers grows slowly, unevenly, and varies significantly across accounts. <br><br>
+                        <h4 class="problemstatementSubheading think">💡Think</h4>
+                        How should a system evaluate whether current AI investment levels are economically justified when usage signals are partial, fragmented, and do not directly translate into immediate revenue?
+                    </p>
+                    <hr>
+                </section>
+
+                <section data-section="2" class="d-none">
+                    <h3 class="problemstatementSubheading">
+                        Scenario 2 – Time and Expectation Issue
+                    </h3>
+                    <p class="scenario">
+                        Enterprise customers require extended periods to test, validate, approve, and operationalize AI capabilities. Infrastructure is deployed upfront, but revenue realization occurs much later. <br><br>
+                        <h4 class="problemstatementSubheading think">💡Think</h4>
+                        How should a system assess realistic timelines for AI revenue realization without relying on optimistic adoption assumptions?
+                    </p>
+                    <hr>
+                </section>
+
+                <section data-section="3" class="d-none">
+                    <h3 class="problemstatementSubheading">
+                        Scenario 3 – User Behavior and Edge Cases
+                    </h3>
+                    <p class="scenario">
+                        Some customers engage with AI services only at an experimental level and never transition to scaled usage.
+                        <h4 class="problemstatementSubheading think">💡Think</h4>
+                        How should a system distinguish genuine long-term potential from non-scalable experimentation?
+                    </p>
+                    <hr>
+                </section>
+
+                <section data-section="4" class="d-none">
+                    <h3 class="problemstatementSubheading">
+                        Scenario 4 – Scale and Growth
+                    </h3>
+                    <p class="scenario">
+                        As AI infrastructure expands globally, fixed costs increase sharply and become less reversible.
+                        <h4 class="problemstatementSubheading think">💡Think</h4>
+                        How should a system adapt investment pacing as forecasting errors grow more expensive?
+                    </p>
+                    <hr>
+                </section>
+            </section>
+
+            <!-- ================= SECTION THREE ================= -->
+            <section class="section_three">
+                <h3 class="problemstatementSubheading">
+                    Gun-shot Problem Statement:
+                </h3>
+                <p class="scenario">
+                    Solve the problem of aligning large-scale AI infrastructure investment with realistic and sustainable enterprise revenue.
+                </p>
+                <hr>
+            </section>
+
+            <!-- ================= SECTION FOUR (ROUNDS) ================= -->
+            <section class="section_four">
+
+                <!-- ================= ROUND 1 ================= -->
+                <section class="round1" data-round="1">
+                    <h3 class="problemstatementSubheading round1">
+                        ROUND 1 – Aptitude and Logical Reasoning
+                    </h3>
+
+                    <p class="scenario">
+                        During a financial quarter AI infrastructure costs are incurred for 1,000 usage units.
+                        <span class="question">Question</span><br>
+                        What is the minimum number of active enterprise contracts required?
+                    </p>
+                    <hr>
+
+                    <form class="round-form" data-round="1">
+                        <h3 class="formHeading">Submit Form for Round-1</h3>
+                        <input class="teamName" placeholder="Team Name">
+                        <input class="teamLeader" placeholder="Team Leader">
+                        <input class="teamId" placeholder="Team Id/Number">
+                        <textarea placeholder="Enter Your Answer"></textarea>
+                        <button class="btn btn-success">Submit!</button>
+                    </form>
+
+                    <div class="round-code-input-container d-none" data-unlock="2">
+                        <div class="codeCardContainer">
+                            <h1 class="text">Enter Round-2 Code!</h1>
+                            <input type="text">
+                            <button class="btn btn-secondary">Enter</button>
+                            <p class="errorMsg text-danger"></p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ================= ROUND 2 ================= -->
+                <section class="round2 d-none" data-round="2">
+                    <h3 class="problemstatementSubheading round2">
+                        ROUND 2 – Aptitude and Analytical Reasoning
+                    </h3>
+
+                    <form class="round-form d-none" data-round="2">
+                        <h3 class="formHeading">Submit Form for Round-2</h3>
+                        <input class="teamName">
+                        <input class="teamLeader">
+                        <input class="teamId">
+                        <textarea></textarea>
+                        <button class="btn btn-success">Submit!</button>
+                    </form>
+
+                    <div class="round-code-input-container d-none" data-unlock="3">
+                        <div class="codeCardContainer">
+                            <h1 class="text">Enter Round-3 Code!</h1>
+                            <input type="text">
+                            <button class="btn btn-secondary">Enter</button>
+                            <p class="errorMsg text-danger"></p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ================= ROUND 3 ================= -->
+                <section class="round3 d-none" data-round="3">
+                    <h3 class="problemstatementSubheading round3">
+                        ROUND 3 – System Thinking (No Coding)
+                    </h3>
+
+                    <form class="round-form d-none" data-round="3">
+                        <h3 class="formHeading">Submit Form for Round-3</h3>
+                        <input class="teamName">
+                        <input class="teamLeader">
+                        <input class="teamId">
+                        <textarea></textarea>
+                        <button class="btn btn-success">Submit!</button>
+                    </form>
+
+                    <div class="round-code-input-container d-none" data-unlock="4">
+                        <div class="codeCardContainer">
+                            <h1 class="text">Enter Round-4 Code!</h1>
+                            <input type="text">
+                            <button class="btn btn-secondary">Enter</button>
+                            <p class="errorMsg text-danger"></p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ================= ROUND 4 ================= -->
+                <section class="round4 d-none" data-round="4">
+                    <h3 class="problemstatementSubheading round4">
+                        ROUND 4 – End-to-End Problem Thinking
+                    </h3>
+
+                    <form class="round-form d-none" data-round="4">
+                        <h3 class="formHeading">Submit Form for Round-4</h3>
+                        <input class="teamName">
+                        <input class="teamLeader">
+                        <input class="teamId">
+                        <textarea></textarea>
+                        <button class="btn btn-success">Submit!</button>
+                    </form>
+                </section>
+
+            </section>
+        </section>
+
+        <!-- =================================================================Problem Statement - 3 ==================================================== -->
+        <section class="problem d-none" data-problem="3">
+
+            <!-- ================= SECTION ONE ================= -->
+            <section class="section_one">
+                <h2 class="problemstatementTitle text-center">
+                    3 — AI Infrastructure Monetization and Return Alignment Experience
+                </h2>
+                <hr>
+
+                <h3 class="problemstatementSubheading">
+                    Story / Problem Narrative
+                </h3>
+
+                <p class="scenario">
+                    A technology company makes aggressive, front-loaded investments in AI infrastructure, including large-scale data centers, specialized accelerators, and long-duration model training pipelines. These investments immediately lock in high fixed and operational costs. However, enterprise customers approach AI adoption cautiously—running pilots, seeking internal approvals, testing limited use cases, and postponing long-term commitments. <br><br>
+                    As a result, leadership observes a widening imbalance: costs materialize with certainty and speed, while revenue materializes slowly, irregularly, and with significant uncertainty. Although technical capability and deployment scale continue to improve, the organization struggles to determine whether this progress is translating into real, defensible economic value. The core challenge is no longer technological feasibility, but timing, measurement, and financial alignment.
+                </p>
+                <hr>
+            </section>
+
+            <!-- ================= SECTION TWO (SCENARIOS) ================= -->
+            <section class="section_two">
+                <h3 class="problemstatementSubheading text-center scenarioHeading">
+                    App Structure Through Scenarios
+                </h3>
+
+                <section data-section="1" class="d-none">
+                    <h3 class="problemstatementSubheading">
+                        Scenario 1 - Investment Visibility Problem
+                    </h3>
+                    <p class="scenario">
+                        AI infrastructure spending increases rapidly due to capacity planning and long-term commitments. Revenue from enterprise customers grows slowly, unevenly, and varies significantly across accounts. <br><br>
+                        <h4 class="problemstatementSubheading think">💡Think</h4>
+                        How should a system evaluate whether current AI investment levels are economically justified when usage signals are partial, fragmented, and do not directly translate into immediate revenue?
+                    </p>
+                    <hr>
+                </section>
+
+                <section data-section="2" class="d-none">
+                    <h3 class="problemstatementSubheading">
+                        Scenario 2 – Time and Expectation Issue
+                    </h3>
+                    <p class="scenario">
+                        Enterprise customers require extended periods to test, validate, approve, and operationalize AI capabilities. Infrastructure is deployed upfront, but revenue realization occurs much later. <br><br>
+                        <h4 class="problemstatementSubheading think">💡Think</h4>
+                        How should a system assess realistic timelines for AI revenue realization without relying on optimistic adoption assumptions?
+                    </p>
+                    <hr>
+                </section>
+
+                <section data-section="3" class="d-none">
+                    <h3 class="problemstatementSubheading">
+                        Scenario 3 – User Behavior and Edge Cases
+                    </h3>
+                    <p class="scenario">
+                        Some customers engage with AI services only at an experimental level and never transition to scaled usage.
+                        <h4 class="problemstatementSubheading think">💡Think</h4>
+                        How should a system distinguish genuine long-term potential from non-scalable experimentation?
+                    </p>
+                    <hr>
+                </section>
+
+                <section data-section="4" class="d-none">
+                    <h3 class="problemstatementSubheading">
+                        Scenario 4 – Scale and Growth
+                    </h3>
+                    <p class="scenario">
+                        As AI infrastructure expands globally, fixed costs increase sharply and become less reversible.
+                        <h4 class="problemstatementSubheading think">💡Think</h4>
+                        How should a system adapt investment pacing as forecasting errors grow more expensive?
+                    </p>
+                    <hr>
+                </section>
+            </section>
+
+            <!-- ================= SECTION THREE ================= -->
+            <section class="section_three">
+                <h3 class="problemstatementSubheading">
+                    Gun-shot Problem Statement:
+                </h3>
+                <p class="scenario">
+                    Solve the problem of aligning large-scale AI infrastructure investment with realistic and sustainable enterprise revenue.
+                </p>
+                <hr>
+            </section>
+
+            <!-- ================= SECTION FOUR (ROUNDS) ================= -->
+            <section class="section_four">
+
+                <!-- ================= ROUND 1 ================= -->
+                <section class="round1" data-round="1">
+                    <h3 class="problemstatementSubheading round1">
+                        ROUND 1 – Aptitude and Logical Reasoning
+                    </h3>
+
+                    <p class="scenario">
+                        During a financial quarter AI infrastructure costs are incurred for 1,000 usage units.
+                        <span class="question">Question</span><br>
+                        What is the minimum number of active enterprise contracts required?
+                    </p>
+                    <hr>
+
+                    <form class="round-form" data-round="1">
+                        <h3 class="formHeading">Submit Form for Round-1</h3>
+                        <input class="teamName" placeholder="Team Name">
+                        <input class="teamLeader" placeholder="Team Leader">
+                        <input class="teamId" placeholder="Team Id/Number">
+                        <textarea placeholder="Enter Your Answer"></textarea>
+                        <button class="btn btn-success">Submit!</button>
+                    </form>
+
+                    <div class="round-code-input-container d-none" data-unlock="2">
+                        <div class="codeCardContainer">
+                            <h1 class="text">Enter Round-2 Code!</h1>
+                            <input type="text">
+                            <button class="btn btn-secondary">Enter</button>
+                            <p class="errorMsg text-danger"></p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ================= ROUND 2 ================= -->
+                <section class="round2 d-none" data-round="2">
+                    <h3 class="problemstatementSubheading round2">
+                        ROUND 2 – Aptitude and Analytical Reasoning
+                    </h3>
+
+                    <form class="round-form d-none" data-round="2">
+                        <h3 class="formHeading">Submit Form for Round-2</h3>
+                        <input class="teamName">
+                        <input class="teamLeader">
+                        <input class="teamId">
+                        <textarea></textarea>
+                        <button class="btn btn-success">Submit!</button>
+                    </form>
+
+                    <div class="round-code-input-container d-none" data-unlock="3">
+                        <div class="codeCardContainer">
+                            <h1 class="text">Enter Round-3 Code!</h1>
+                            <input type="text">
+                            <button class="btn btn-secondary">Enter</button>
+                            <p class="errorMsg text-danger"></p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ================= ROUND 3 ================= -->
+                <section class="round3 d-none" data-round="3">
+                    <h3 class="problemstatementSubheading round3">
+                        ROUND 3 – System Thinking (No Coding)
+                    </h3>
+
+                    <form class="round-form d-none" data-round="3">
+                        <h3 class="formHeading">Submit Form for Round-3</h3>
+                        <input class="teamName">
+                        <input class="teamLeader">
+                        <input class="teamId">
+                        <textarea></textarea>
+                        <button class="btn btn-success">Submit!</button>
+                    </form>
+
+                    <div class="round-code-input-container d-none" data-unlock="4">
+                        <div class="codeCardContainer">
+                            <h1 class="text">Enter Round-4 Code!</h1>
+                            <input type="text">
+                            <button class="btn btn-secondary">Enter</button>
+                            <p class="errorMsg text-danger"></p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ================= ROUND 4 ================= -->
+                <section class="round4 d-none" data-round="4">
+                    <h3 class="problemstatementSubheading round4">
+                        ROUND 4 – End-to-End Problem Thinking
+                    </h3>
+
+                    <form class="round-form d-none" data-round="4">
+                        <h3 class="formHeading">Submit Form for Round-4</h3>
+                        <input class="teamName">
+                        <input class="teamLeader">
+                        <input class="teamId">
+                        <textarea></textarea>
+                        <button class="btn btn-success">Submit!</button>
+                    </form>
+                </section>
+
+            </section>
+        </section>
+
+        <!-- =================================================================Problem Statement - 4 ==================================================== -->
+        <section class="problem d-none" data-problem="4">
+
+            <!-- ================= SECTION ONE ================= -->
+            <section class="section_one">
+                <h2 class="problemstatementTitle text-center">
+                    4 — AI Infrastructure Monetization and Return Alignment Experience
+                </h2>
+                <hr>
+
+                <h3 class="problemstatementSubheading">
+                    Story / Problem Narrative
+                </h3>
+
+                <p class="scenario">
+                    A technology company makes aggressive, front-loaded investments in AI infrastructure, including large-scale data centers, specialized accelerators, and long-duration model training pipelines. These investments immediately lock in high fixed and operational costs. However, enterprise customers approach AI adoption cautiously—running pilots, seeking internal approvals, testing limited use cases, and postponing long-term commitments. <br><br>
+                    As a result, leadership observes a widening imbalance: costs materialize with certainty and speed, while revenue materializes slowly, irregularly, and with significant uncertainty. Although technical capability and deployment scale continue to improve, the organization struggles to determine whether this progress is translating into real, defensible economic value. The core challenge is no longer technological feasibility, but timing, measurement, and financial alignment.
+                </p>
+                <hr>
+            </section>
+
+            <!-- ================= SECTION TWO (SCENARIOS) ================= -->
+            <section class="section_two">
+                <h3 class="problemstatementSubheading text-center scenarioHeading">
+                    App Structure Through Scenarios
+                </h3>
+
+                <section data-section="1" class="d-none">
+                    <h3 class="problemstatementSubheading">
+                        Scenario 1 - Investment Visibility Problem
+                    </h3>
+                    <p class="scenario">
+                        AI infrastructure spending increases rapidly due to capacity planning and long-term commitments. Revenue from enterprise customers grows slowly, unevenly, and varies significantly across accounts. <br><br>
+                        <h4 class="problemstatementSubheading think">💡Think</h4>
+                        How should a system evaluate whether current AI investment levels are economically justified when usage signals are partial, fragmented, and do not directly translate into immediate revenue?
+                    </p>
+                    <hr>
+                </section>
+
+                <section data-section="2" class="d-none">
+                    <h3 class="problemstatementSubheading">
+                        Scenario 2 – Time and Expectation Issue
+                    </h3>
+                    <p class="scenario">
+                        Enterprise customers require extended periods to test, validate, approve, and operationalize AI capabilities. Infrastructure is deployed upfront, but revenue realization occurs much later. <br><br>
+                        <h4 class="problemstatementSubheading think">💡Think</h4>
+                        How should a system assess realistic timelines for AI revenue realization without relying on optimistic adoption assumptions?
+                    </p>
+                    <hr>
+                </section>
+
+                <section data-section="3" class="d-none">
+                    <h3 class="problemstatementSubheading">
+                        Scenario 3 – User Behavior and Edge Cases
+                    </h3>
+                    <p class="scenario">
+                        Some customers engage with AI services only at an experimental level and never transition to scaled usage.
+                        <h4 class="problemstatementSubheading think">💡Think</h4>
+                        How should a system distinguish genuine long-term potential from non-scalable experimentation?
+                    </p>
+                    <hr>
+                </section>
+
+                <section data-section="4" class="d-none">
+                    <h3 class="problemstatementSubheading">
+                        Scenario 4 – Scale and Growth
+                    </h3>
+                    <p class="scenario">
+                        As AI infrastructure expands globally, fixed costs increase sharply and become less reversible.
+                        <h4 class="problemstatementSubheading think">💡Think</h4>
+                        How should a system adapt investment pacing as forecasting errors grow more expensive?
+                    </p>
+                    <hr>
+                </section>
+            </section>
+
+            <!-- ================= SECTION THREE ================= -->
+            <section class="section_three">
+                <h3 class="problemstatementSubheading">
+                    Gun-shot Problem Statement:
+                </h3>
+                <p class="scenario">
+                    Solve the problem of aligning large-scale AI infrastructure investment with realistic and sustainable enterprise revenue.
+                </p>
+                <hr>
+            </section>
+
+            <!-- ================= SECTION FOUR (ROUNDS) ================= -->
+            <section class="section_four">
+
+                <!-- ================= ROUND 1 ================= -->
+                <section class="round1" data-round="1">
+                    <h3 class="problemstatementSubheading round1">
+                        ROUND 1 – Aptitude and Logical Reasoning
+                    </h3>
+
+                    <p class="scenario">
+                        During a financial quarter AI infrastructure costs are incurred for 1,000 usage units.
+                        <span class="question">Question</span><br>
+                        What is the minimum number of active enterprise contracts required?
+                    </p>
+                    <hr>
+
+                    <form class="round-form" data-round="1">
+                        <h3 class="formHeading">Submit Form for Round-1</h3>
+                        <input class="teamName" placeholder="Team Name">
+                        <input class="teamLeader" placeholder="Team Leader">
+                        <input class="teamId" placeholder="Team Id/Number">
+                        <textarea placeholder="Enter Your Answer"></textarea>
+                        <button class="btn btn-success">Submit!</button>
+                    </form>
+
+                    <div class="round-code-input-container d-none" data-unlock="2">
+                        <div class="codeCardContainer">
+                            <h1 class="text">Enter Round-2 Code!</h1>
+                            <input type="text">
+                            <button class="btn btn-secondary">Enter</button>
+                            <p class="errorMsg text-danger"></p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ================= ROUND 2 ================= -->
+                <section class="round2 d-none" data-round="2">
+                    <h3 class="problemstatementSubheading round2">
+                        ROUND 2 – Aptitude and Analytical Reasoning
+                    </h3>
+
+                    <form class="round-form d-none" data-round="2">
+                        <h3 class="formHeading">Submit Form for Round-2</h3>
+                        <input class="teamName">
+                        <input class="teamLeader">
+                        <input class="teamId">
+                        <textarea></textarea>
+                        <button class="btn btn-success">Submit!</button>
+                    </form>
+
+                    <div class="round-code-input-container d-none" data-unlock="3">
+                        <div class="codeCardContainer">
+                            <h1 class="text">Enter Round-3 Code!</h1>
+                            <input type="text">
+                            <button class="btn btn-secondary">Enter</button>
+                            <p class="errorMsg text-danger"></p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ================= ROUND 3 ================= -->
+                <section class="round3 d-none" data-round="3">
+                    <h3 class="problemstatementSubheading round3">
+                        ROUND 3 – System Thinking (No Coding)
+                    </h3>
+
+                    <form class="round-form d-none" data-round="3">
+                        <h3 class="formHeading">Submit Form for Round-3</h3>
+                        <input class="teamName">
+                        <input class="teamLeader">
+                        <input class="teamId">
+                        <textarea></textarea>
+                        <button class="btn btn-success">Submit!</button>
+                    </form>
+
+                    <div class="round-code-input-container d-none" data-unlock="4">
+                        <div class="codeCardContainer">
+                            <h1 class="text">Enter Round-4 Code!</h1>
+                            <input type="text">
+                            <button class="btn btn-secondary">Enter</button>
+                            <p class="errorMsg text-danger"></p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ================= ROUND 4 ================= -->
+                <section class="round4 d-none" data-round="4">
+                    <h3 class="problemstatementSubheading round4">
+                        ROUND 4 – End-to-End Problem Thinking
+                    </h3>
+
+                    <form class="round-form d-none" data-round="4">
+                        <h3 class="formHeading">Submit Form for Round-4</h3>
+                        <input class="teamName">
+                        <input class="teamLeader">
+                        <input class="teamId">
+                        <textarea></textarea>
+                        <button class="btn btn-success">Submit!</button>
+                    </form>
+                </section>
+
+            </section>
+        </section>
+
     </section>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="script.js"></script>
