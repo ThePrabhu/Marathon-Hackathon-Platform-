@@ -107,6 +107,8 @@
     opacity: 0.9;
 }
 
+
+
 /* ===============================
    INPUT FIELD
 ================================ */
@@ -292,11 +294,13 @@ body {
 .section_one {
   background:
     linear-gradient(180deg, #ffffff 0%, #fff1f1 100%);
+    border: 2px solid rgb(0, 0, 0);
 }
 
 .section_two {
   background:
     linear-gradient(180deg, #ffffff 0%, #f7f7f7 100%);
+    border: 2px solid #800000;
 }
 
 .section_three {
@@ -307,6 +311,11 @@ body {
 .section_four {
   background:
     linear-gradient(180deg, #ffffff 0%, #ededed 100%);
+}
+
+.section_four{
+  border: 2px solid black;
+  font-family: "Bungee", sans-serif;
 }
 
 /* ================= TEXT SYSTEM ================= */
@@ -330,6 +339,11 @@ body {
   padding-left: 12px;
 }
 
+.scenarioHeading,
+.think{
+  border: none;
+
+}
 .scenario {
   font-size: 18px;
   line-height: 1.7;

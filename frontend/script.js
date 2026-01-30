@@ -21,6 +21,20 @@ let currentRound = 1;
 const show = el => el && el.classList.remove("d-none");
 const hide = el => el && el.classList.add("d-none");
 
+
+/**************************************
+ * PROGRESS PERSISTENCE (LOCAL)
+ **************************************/
+function getProgress(problemId) {
+  return Number(localStorage.getItem(`progress_${problemId}`)) || 0;
+}
+
+function setProgress(problemId, round) {
+  localStorage.setItem(`progress_${problemId}`, round);
+}
+
+
+
 /**************************************
  * SUPABASE CODE VERIFICATION
  **************************************/
@@ -257,6 +271,7 @@ document.querySelectorAll(".round-code-input-container").forEach(box => {
     if (nextForm) show(nextForm);
 
     currentRound = nextRound;
+    setProgress(currentProblemId, nextRound);
   });
   });
 });
@@ -306,4 +321,44 @@ document.querySelectorAll(".round-form").forEach(form => {
       submitBtn.textContent = "Submitted";
     }, 2500);
   });
+});
+
+/**************************************
+ * RESTORE STATE ON PAGE LOAD
+ **************************************/
+window.addEventListener("load", () => {
+  const progress = getProgress(currentProblemId);
+  if (!progress) return;
+
+  // Hide entry gate
+  hide(document.querySelector(".card-container"));
+
+  // Show correct problem
+  const problem = document.querySelector(
+    `.problem[data-problem="${currentProblemId}"]`
+  );
+  if (!problem) return;
+
+  show(problem);
+
+  // Reset everything first
+  problem.querySelectorAll("[data-round]").forEach(hide);
+  problem.querySelectorAll("[data-section]").forEach(hide);
+  problem.querySelectorAll(".round-code-input-container").forEach(hide);
+
+  // Replay unlocked rounds
+  for (let r = 1; r <= progress; r++) {
+    const scenario = problem.querySelector(`[data-section="${r}"]`);
+    if (scenario) show(scenario);
+
+    const roundBlock = problem.querySelector(`[data-round="${r}"]`);
+    if (roundBlock) show(roundBlock);
+  }
+
+  // Show next form if exists
+  const nextRound = progress + 1;
+  const nextForm = problem.querySelector(
+    `.round-form[data-round="${nextRound}"]`
+  );
+  if (nextForm) show(nextForm);
 });
