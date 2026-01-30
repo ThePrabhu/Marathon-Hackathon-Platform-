@@ -47,25 +47,42 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 
   function replayProblem(problemEl, progress) {
-    if (progress === 0) {
-      show(problemEl.querySelector('[data-round="1"]'));
-      show(problemEl.querySelector('.round-form[data-round="1"]'));
-      return;
-    }
+    // Always show the initial story section
+    show(problemEl.querySelector(`[data-section="1"]`));
 
+    // Show completed rounds' questions
     for (let i = 1; i <= progress; i++) {
       show(problemEl.querySelector(`[data-round="${i}"]`));
-      if (i === progress) {
-        show(problemEl.querySelector(`.round-form[data-round="${i}"]`));
-      } else if (i < progress) {
-        show(problemEl.querySelector(`.round-code-input-container[data-unlock="${i + 1}"]`));
-      }
     }
 
-    if (progress > 0 && progress < 4) {
+    // Show scenarios for completed rounds
+    if (progress >= 1) {
+      // Scenario 1 is implicitly shown with data-section="1" for problem description.
+      // No additional scenario for Round 1 submission.
+    }
+    if (progress >= 2) { // After Round 2 unlock, Scenario 1 should be visible
+      show(problemEl.querySelector(`[data-section="1"]`)); // Scenario 1 appears after Round 2 unlock
+    }
+    if (progress >= 3) { // After Round 3 unlock, Scenario 2 should be visible
+      show(problemEl.querySelector(`[data-section="2"]`));
+    }
+    if (progress >= 4) { // After Round 4 unlock, Scenario 3 & 4 should be visible
+      show(problemEl.querySelector(`[data-section="3"]`));
+      show(problemEl.querySelector(`[data-section="4"]`));
+    }
+
+    if (progress === 0) {
+      // User has not started any round, show Round 1 question and form
+      show(problemEl.querySelector(`[data-round="1"]`));
+      show(problemEl.querySelector(`.round-form[data-round="1"]`));
+    } else if (progress > 0 && progress < 4) {
+      // User has completed 'progress' round. Show the next round's question and its unlock code container.
+      show(problemEl.querySelector(`[data-round="${progress + 1}"]`));
       show(problemEl.querySelector(`.round-code-input-container[data-unlock="${progress + 1}"]`));
+    } else if (progress === 4) {
+      // All 4 rounds are completed. All rounds and scenarios should be visible.
+      // No forms or unlock codes to display.
     }
-
   }
 
   /* ================= DATABASE ================= */
@@ -206,8 +223,6 @@ window.addEventListener("DOMContentLoaded", () => {
           );
           setProgress(pid, round);
         }
-        show(problemEl.querySelector(`.round-form[data-round="${round + 1}"]`));
-        setProgress(pid, round);
       });
     });
 
